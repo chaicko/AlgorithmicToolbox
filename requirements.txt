@@ -1,0 +1,3 @@
+nose
+nose-cprof
+nose-timer

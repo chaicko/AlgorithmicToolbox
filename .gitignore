@@ -1,0 +1,7 @@
+*~
+*.user
+build
+*.autosave
+*.orig
+*.pyc
+.idea
