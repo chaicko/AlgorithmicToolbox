@@ -5,3 +5,4 @@ build
 *.orig
 *.pyc
 .idea
+stats.dat
