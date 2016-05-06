@@ -21,13 +21,13 @@ def max_pairwise_prod(a: list) -> int:
     :param a: The list of positive integers.
     :return: max(a[i] * a[j]) where i != j and i,j <= len(a)
     """
-    result = 0
+    max_values = [0, 0]
     n = len(a)
     for i in range(0, n):
-        for j in range(i+1, n):
-            if a[i] * a[j] > result:
-                result = a[i] * a[j]
-    return result
+        if a[i] >= max_values[0]:
+            max_values[1] = max_values[0]
+            max_values[0] = a[i]
+    return max_values[0] * max_values[1]
 
 
 if __name__ == '__main__':
