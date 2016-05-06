@@ -12,7 +12,5 @@ class TestMaxPairwiseProduct(TestCase):
         assert max_pairwise_prod([0, 2]) == 0
 
     def test_max_seq_simple(self):
-        seq = [0] * MAX_SEQ_LEN
-        seq[0] = 1
-        seq[1] = 2
-        assert max_pairwise_prod(seq) == 2
+        seq = [(i % MAX_VALUE) + 1 for i in range(MAX_SEQ_LEN)]
+        assert max_pairwise_prod(seq) == MAX_VALUE * MAX_VALUE
