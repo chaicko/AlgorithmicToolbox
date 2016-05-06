@@ -21,10 +21,6 @@ class TestMaxPairwiseProduct(TestCase):
     def test_min_seq_equal_values(self):
         assert max_pairwise_prod([2, 2]) == 4
 
-    def test_max_seq_simple(self):
-        seq = [(i % MAX_VALUE) + 1 for i in range(MAX_SEQ_LEN)]
-        assert max_pairwise_prod(seq) == MAX_VALUE * MAX_VALUE
-
     def test_max_seq_random(self):
         seq = [random.randint(0, MAX_VALUE) for _ in range(MAX_SEQ_LEN)]
         largest = heapq.nlargest(2, seq)
