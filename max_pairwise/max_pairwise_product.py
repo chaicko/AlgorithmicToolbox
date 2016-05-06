@@ -1,6 +1,6 @@
 # Uses python3
-MAX_SEQ_LEN = 2 * (10 ^ 5)
-MAX_VALUE = 10 ^ 5
+MAX_SEQ_LEN = 2 * (10 ** 5)
+MAX_VALUE = 10 ** 5
 
 
 def max_pairwise_prod(a: list) -> int:
