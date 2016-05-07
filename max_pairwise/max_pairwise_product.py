@@ -27,6 +27,8 @@ def max_pairwise_prod(a: list) -> int:
         if a[i] >= max_values[0]:
             max_values[1] = max_values[0]
             max_values[0] = a[i]
+        elif a[i] >= max_values[1]:
+            max_values[1] = a[i]
     return max_values[0] * max_values[1]
 
 

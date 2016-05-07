@@ -13,7 +13,7 @@ class TestMaxPairwiseProduct(TestCase):
         assert max_pairwise_prod([1]) == 0
 
     def test_min_seq(self):
-        assert max_pairwise_prod([1, 2]) == 2
+        assert max_pairwise_prod([100000, 90000]) == 9000000000
 
     def test_min_seq_zero(self):
         assert max_pairwise_prod([0, 2]) == 0
