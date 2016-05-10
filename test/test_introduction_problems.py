@@ -1,8 +1,8 @@
 from unittest import TestCase
 from introduction_problems.fib import *
 from introduction_problems.fibonacci_last_digit import *
-from utils.decorators import *
-from nose.tools import eq_
+from introduction_problems.gcd import *
+from nose.tools import eq_, timed
 
 
 def fib(n):
@@ -37,3 +37,15 @@ class TestFibonacciLastDigit(TestCase):
             r = get_fibonacci_last_digit(i)
             c = f % 10
             eq_(r, c, "get_fibonacci_last_digit(%d)=%d != %d" % (i, r, c))
+
+
+class TestGCD(TestCase):
+    def test_sample1(self):
+        eq_(gcd(18, 35), 1)
+
+    def test_sample2(self):
+        eq_(gcd(28851538, 1183019), 17657)
+
+    @timed(5)
+    def test_max_values(self):
+        eq_(gcd(2000000000, 1999999999), 1)
