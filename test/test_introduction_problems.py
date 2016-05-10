@@ -1,5 +1,6 @@
 from unittest import TestCase
 from introduction_problems.fib import *
+from introduction_problems.fibonacci_last_digit import *
 from utils.decorators import *
 from nose.tools import eq_
 
@@ -22,3 +23,17 @@ class TestSmallFibonacci(TestCase):
         for index, fibo in enumerate(fib(45)):
             res = calc_fib(index)
             eq_(res, fibo, "fib(%d)=%d != %d" % (index, res, fibo))
+
+
+class TestFibonacciLastDigit(TestCase):
+    def test_fib_0_is_0(self):
+        eq_(get_fibonacci_last_digit(0), 0)
+
+    def test_fib_1_is_1(self):
+        eq_(get_fibonacci_last_digit(1), 1)
+
+    def test_fib_all(self):
+        for i, f in enumerate(fib(FIBONACCI_LAST_DIGIT_MAX_VALUE)):
+            r = get_fibonacci_last_digit(i)
+            c = f % 10
+            eq_(r, c, "get_fibonacci_last_digit(%d)=%d != %d" % (i, r, c))
