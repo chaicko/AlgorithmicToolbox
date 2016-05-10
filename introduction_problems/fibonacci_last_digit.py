@@ -1,4 +1,6 @@
 # Uses python3
+import sys
+
 FIBONACCI_LAST_DIGIT_MAX_VALUE = 10 ** 7
 
 
@@ -12,5 +14,6 @@ def get_fibonacci_last_digit(n):
 
 
 if __name__ == '__main__':
+    input = sys.stdin.read()
     n = int(input)
     print(get_fibonacci_last_digit(n))
