@@ -2,6 +2,7 @@ from unittest import TestCase
 from introduction_problems.fib import *
 from introduction_problems.fibonacci_last_digit import *
 from introduction_problems.gcd import *
+from introduction_problems.lcm import *
 from nose.tools import eq_, timed
 
 
@@ -49,3 +50,11 @@ class TestGCD(TestCase):
     @timed(5)
     def test_max_values(self):
         eq_(gcd(2000000000, 1999999999), 1)
+
+
+class TestLCM(TestCase):
+    def test_sample1(self):
+        eq_(lcm(6, 8), 24)
+
+    def test_sample2(self):
+        eq_(lcm(28851538, 1183019), 1933053046)
