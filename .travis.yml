@@ -1,0 +1,15 @@
+language: python
+python:
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.5-dev" # 3.5 development branch
+  - "nightly" # currently points to 3.6-dev
+install:
+  # Build/test dependencies
+  - pip install -r requirements.txt -r dev-requirements.txt
+script:
+  # Normal tests
+  - nosetests --process-timeout=5 --processes=-1
+  # Integration tests
