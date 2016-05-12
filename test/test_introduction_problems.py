@@ -2,7 +2,7 @@ from unittest import TestCase
 from introduction_problems.fib import *
 from introduction_problems.fibonacci_last_digit import *
 from introduction_problems.gcd import *
-from introduction_problems.lcm import *
+from introduction_problems.lcm import lcm
 from nose.tools import eq_, timed
 
 
@@ -54,7 +54,11 @@ class TestGCD(TestCase):
 
 class TestLCM(TestCase):
     def test_sample1(self):
-        eq_(lcm(6, 8), 24)
+        l = lcm(6, 8)
+        assert not isinstance(l, float)
+        eq_(l, 24)
 
     def test_sample2(self):
-        eq_(lcm(28851538, 1183019), 1933053046)
+        l = lcm(28851538, 1183019)
+        assert not isinstance(l, float)
+        eq_(l, 1933053046)
