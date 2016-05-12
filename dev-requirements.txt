@@ -1,3 +1,5 @@
+coverage
 nose
 nose-cprof
 nose-timer
+python-coveralls
