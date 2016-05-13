@@ -4,6 +4,8 @@ from introduction_problems.fibonacci_last_digit import \
     get_fibonacci_last_digit, FIBONACCI_LAST_DIGIT_MAX_VALUE
 from introduction_problems.gcd import gcd
 from introduction_problems.lcm import lcm
+from introduction_problems.fibonacci_huge import get_fibonaccihuge, \
+    FIBO_HUGE_MAX_MOD, FIBO_HUGE_MAX_NUM
 
 
 def fib(n):
@@ -61,3 +63,11 @@ class TestLCM(TestCase):
         l = lcm(28851538, 1183019)
         assert not isinstance(l, float)
         assert l == 1933053046
+
+
+class TestHugeFibonacci(TestCase):
+    def test_fibonaccihuge_0_is_0(self):
+        assert get_fibonaccihuge(0, 10) == 0
+
+    def test_fibonaccihuge_1_is_1(self):
+        assert get_fibonaccihuge(1, 10) == 1
