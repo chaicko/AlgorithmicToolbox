@@ -89,6 +89,5 @@ class TestHugeFibonacci(TestCase):
     def test_fibonaccihuge_14_mod_3(self):
         assert get_fibonaccihuge(14, 3) == 2
 
-    @pytest.mark.skip(reason="still working on this")
     def test_fibonaccihuge_sample1(self):
         assert get_fibonaccihuge(281621358815590, 30524) == 11963

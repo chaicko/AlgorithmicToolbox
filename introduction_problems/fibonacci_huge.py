@@ -35,12 +35,10 @@ def fib_seq_mod(m):
 
 
 def get_fibonaccihuge(n, m):
-    if n < 1:
-        return n
-    a, b = 1, 1
-    for i in range(2, n):
-        a, b = b, (a + b) % m
-    return b
+    seq_mod = fib_seq_mod(m)
+    seq_mod_len = len(seq_mod)
+    rem = n % seq_mod_len
+    return seq_mod[rem]
 
 if __name__ == '__main__':
     input = sys.stdin.read()
