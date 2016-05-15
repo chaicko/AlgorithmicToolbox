@@ -12,12 +12,13 @@ def fibseq():
         a, b = b, a + b
 
 
-def fib_mod_seq(m):
+def fib_seq_mod(m):
     """Returns the fibonacci modulo 'm' periodic sequence.
     :param m: modulo
     :return: sequence of numbers that form the Pisano period (modulo m)
     """
     seq = []
+    first_period = seq
     period_len = 0
     for i, f in enumerate(fibseq()):
         fm = f % m

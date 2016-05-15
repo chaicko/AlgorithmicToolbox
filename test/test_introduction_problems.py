@@ -5,7 +5,7 @@ from introduction_problems.fibonacci_last_digit import \
 from introduction_problems.gcd import gcd
 from introduction_problems.lcm import lcm
 from introduction_problems.fibonacci_huge import get_fibonaccihuge, \
-    fib_mod_seq, FIBO_HUGE_MAX_MOD, FIBO_HUGE_MAX_NUM
+    fib_seq_mod, FIBO_HUGE_MAX_MOD, FIBO_HUGE_MAX_NUM
 import pytest
 
 
@@ -68,16 +68,16 @@ class TestLCM(TestCase):
 
 class TestHugeFibonacci(TestCase):
     def test_fib_mod2_seq(self):
-        assert fib_mod_seq(2) == [0, 1, 1]
+        assert fib_seq_mod(2) == [0, 1, 1]
 
     def test_fib_mod3_seq(self):
-        assert fib_mod_seq(3) == [0, 1, 1, 2, 0, 2, 2, 1]
+        assert fib_seq_mod(3) == [0, 1, 1, 2, 0, 2, 2, 1]
 
     def test_fib_mod4_seq(self):
-        assert fib_mod_seq(4) == [0, 1, 1, 2, 3, 1]
+        assert fib_seq_mod(4) == [0, 1, 1, 2, 3, 1]
 
     def test_fib_mod5_seq(self):
-        assert fib_mod_seq(5) == [0, 1, 1, 2, 3, 0, 3, 3, 1, 4, 0, 4, 4, 3, 2,
+        assert fib_seq_mod(5) == [0, 1, 1, 2, 3, 0, 3, 3, 1, 4, 0, 4, 4, 3, 2,
                                   0, 2, 2, 4, 1]
 
     def test_fibonaccihuge_0_is_0(self):
