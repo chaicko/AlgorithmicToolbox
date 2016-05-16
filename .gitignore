@@ -7,3 +7,5 @@ build
 .idea
 stats.dat
 __pycache__
+*.coverage
+.cache

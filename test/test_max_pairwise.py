@@ -1,5 +1,6 @@
 from unittest import TestCase
-from max_pairwise.max_pairwise_product import *
+from max_pairwise.max_pairwise_product import max_pairwise_prod, MAX_SEQ_LEN,\
+    MAX_VALUE
 import random
 import heapq
 

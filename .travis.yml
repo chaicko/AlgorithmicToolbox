@@ -1,6 +1,5 @@
 language: python
 python:
-  - "3.2"
   - "3.3"
   - "3.4"
   - "3.5"
@@ -9,5 +8,7 @@ install:
   - pip install -r requirements.txt -r dev-requirements.txt
 script:
   # Normal tests
-  - nosetests --process-timeout=5 --processes=-1
+  - py.test --boxed
   # Integration tests
+after_success:
+  - coveralls
