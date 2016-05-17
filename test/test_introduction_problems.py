@@ -6,7 +6,6 @@ from introduction_problems.gcd import gcd
 from introduction_problems.lcm import lcm
 from introduction_problems.fibonacci_huge import get_fibonaccihuge, \
     fib_seq_mod, FIBO_HUGE_MAX_MOD, FIBO_HUGE_MAX_NUM
-import pytest
 
 
 def fib(n):
