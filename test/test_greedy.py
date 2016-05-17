@@ -1,5 +1,6 @@
 from unittest import TestCase
 from greedy.change import get_change
+from greedy.fractional_knapsack import get_optimal_value
 
 
 class TestChange(TestCase):
@@ -31,3 +32,11 @@ class TestChange(TestCase):
                 n = 0
 
             assert get_change(i) == coins
+
+
+class TestFractionalKnapsack(TestCase):
+    def test_sample1(self):
+        assert get_optimal_value(50, [60, 100, 120], [20, 50, 30]) == 180.0000
+
+    def test_sample2(self):
+        assert get_optimal_value(10, [60], [30]) == 166.6667
