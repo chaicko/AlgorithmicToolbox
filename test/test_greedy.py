@@ -46,3 +46,9 @@ class TestFractionalKnapsack(TestCase):
 
     def test_items_without_value(self):
         assert get_optimal_value(100, [30, 30, 30], [0, 0, 0]) == 0.0
+
+    def test_knapsack_holds_all_items(self):
+        assert get_optimal_value(100, [30, 30, 30], [10, 10, 10]) == 30.0
+
+    def test_knapsack_holds_all_items_except_last(self):
+        assert get_optimal_value(50, [20, 20, 20], [10, 10, 10]) == 25.0
