@@ -36,7 +36,13 @@ class TestChange(TestCase):
 
 class TestFractionalKnapsack(TestCase):
     def test_sample1(self):
-        assert get_optimal_value(50, [60, 100, 120], [20, 50, 30]) == 180.0000
+        assert get_optimal_value(50, [20, 50, 30], [60, 100, 120]) == 180.0000
 
     def test_sample2(self):
-        assert get_optimal_value(10, [60], [30]) == 166.6667
+        assert get_optimal_value(10, [30], [500]) == (500 / 3)
+
+    def test_empty_knapsack(self):
+        assert get_optimal_value(0, [30], [500]) == 0.0
+
+    def test_items_without_value(self):
+        assert get_optimal_value(100, [30, 30, 30], [0, 0, 0]) == 0.0

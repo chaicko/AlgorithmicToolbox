@@ -3,8 +3,15 @@ import sys
 
 
 def get_optimal_value(capacity, weights, values):
+    c = sorted(zip(weights, values), key=lambda item: item[1] / item[0])
     value = 0.
-    # write your code here
+    while 0 < capacity and len(c):
+        wi, vi = c.pop()  # get item with highest (value / weight) value
+        xi = 1.0
+        if wi > capacity:
+            xi = capacity / wi
+        capacity -= wi
+        value += xi * vi
 
     return value
 
