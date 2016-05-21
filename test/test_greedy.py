@@ -60,3 +60,9 @@ class TestDotProduct:
         dot_product.main()
         out, err = capfd.readouterr()
         assert out == "897\n"
+
+    def test_sample2(self, mock_stdin, capfd):
+        mock_stdin.setvalue(3, [1, 3, -5], [-2, 4, 1])
+        dot_product.main()
+        out, err = capfd.readouterr()
+        assert out == "-25\n"

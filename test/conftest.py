@@ -14,7 +14,7 @@ def mock_stdin(request):
             for i, a in enumerate(args):
                 s = str(a)
                 if isinstance(a, list):
-                    s = " ".join(a)
+                    s = " ".join((str(x) for x in a))
                 if i != len(args) - 1:
                     s += "\n"
                 lines.append(s)
