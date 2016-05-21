@@ -1,6 +1,6 @@
 from greedy.change import get_change
-from greedy.fractional_knapsack import get_optimal_value
 import greedy.dot_product as dot_product
+import greedy.fractional_knapsack as fractional_knapsack
 
 
 class TestChange:
@@ -36,22 +36,34 @@ class TestChange:
 
 class TestFractionalKnapsack:
     def test_sample1(self):
-        assert get_optimal_value(50, [20, 50, 30], [60, 100, 120]) == 180.0000
+        assert fractional_knapsack.get_optimal_value(50, [20, 50, 30],
+                                                     [60, 100, 120]) == 180.0000
 
     def test_sample2(self):
-        assert get_optimal_value(10, [30], [500]) == (500 / 3)
+        assert fractional_knapsack.get_optimal_value(10, [30], [500]) == (
+        500 / 3)
 
     def test_empty_knapsack(self):
-        assert get_optimal_value(0, [30], [500]) == 0.0
+        assert fractional_knapsack.get_optimal_value(0, [30], [500]) == 0.0
 
     def test_items_without_value(self):
-        assert get_optimal_value(100, [30, 30, 30], [0, 0, 0]) == 0.0
+        assert fractional_knapsack.get_optimal_value(100, [30, 30, 30],
+                                                     [0, 0, 0]) == 0.0
 
     def test_knapsack_holds_all_items(self):
-        assert get_optimal_value(100, [30, 30, 30], [10, 10, 10]) == 30.0
+        assert fractional_knapsack.get_optimal_value(100, [30, 30, 30],
+                                                     [10, 10, 10]) == 30.0
 
     def test_knapsack_holds_all_items_except_last(self):
-        assert get_optimal_value(50, [20, 20, 20], [10, 10, 10]) == 25.0
+        assert fractional_knapsack.get_optimal_value(50, [20, 20, 20],
+                                                     [10, 10, 10]) == 25.0
+
+    def test_knapsack_holds_all_items_except_last_stdin(self, mock_stdin,
+                                                        capfd):
+        mock_stdin.setvalue([3, 50], [10, 20], [10, 20], [10, 20])
+        fractional_knapsack.main()
+        out, err = capfd.readouterr()
+        assert "25.0000" in out
 
 
 class TestDotProduct:
