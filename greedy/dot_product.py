@@ -3,7 +3,8 @@ import sys
 
 
 def min_dot_product(a, b):
-    #write your code here
+    a = sorted(a)
+    b = sorted(b, reverse=True)
     res = 0
     for i in range(len(a)):
         res += a[i] * b[i]
