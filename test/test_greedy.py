@@ -1,9 +1,9 @@
-from unittest import TestCase
 from greedy.change import get_change
 from greedy.fractional_knapsack import get_optimal_value
+import greedy.dot_product as dot_product
 
 
-class TestChange(TestCase):
+class TestChange:
     def test_sample1(self):
         assert get_change(2) == 2
 
@@ -34,7 +34,7 @@ class TestChange(TestCase):
             assert get_change(i) == coins
 
 
-class TestFractionalKnapsack(TestCase):
+class TestFractionalKnapsack:
     def test_sample1(self):
         assert get_optimal_value(50, [20, 50, 30], [60, 100, 120]) == 180.0000
 
@@ -52,3 +52,11 @@ class TestFractionalKnapsack(TestCase):
 
     def test_knapsack_holds_all_items_except_last(self):
         assert get_optimal_value(50, [20, 20, 20], [10, 10, 10]) == 25.0
+
+
+class TestDotProduct:
+    def test_sample1(self, mock_stdin, capfd):
+        mock_stdin.setvalue(1, 23, 39)
+        dot_product.main()
+        out, err = capfd.readouterr()
+        assert out == "897\n"
