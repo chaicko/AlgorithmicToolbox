@@ -1,6 +1,7 @@
 from greedy.change import get_change
 import greedy.dot_product as dot_product
 import greedy.fractional_knapsack as fractional_knapsack
+import greedy.covering_segments as covering_segments
 
 
 class TestChange:
@@ -78,3 +79,17 @@ class TestDotProduct:
         dot_product.main()
         out, err = capfd.readouterr()
         assert out == "-25\n"
+
+
+class TestCoveringSegments:
+    def test_sample1(self, mock_stdin, capfd):
+        mock_stdin.setvalue(3, [1, 6], [2, 5], [3, 6])
+        covering_segments.main()
+        out, err = capfd.readouterr()
+        assert "1\n3" in out
+
+    def test_sample1(self, mock_stdin, capfd):
+        mock_stdin.setvalue(4, [4, 7], [1, 3], [2, 5], [5, 6])
+        covering_segments.main()
+        out, err = capfd.readouterr()
+        assert "2\n3 6" in out
