@@ -97,6 +97,16 @@ class TestCoveringSegments:
 
 
 class TestDifferentSummands:
+    def unique_summands_upto_n(self, n):
+        a = 0
+        s = []
+        for l in range(1, n):
+            a += l
+            if a > n:
+                break
+            s.append(l)
+        return s
+
     def test_sample1(self, mock_stdin, capfd):
         mock_stdin.setvalue(6)
         different_summands.main()
@@ -108,3 +118,18 @@ class TestDifferentSummands:
         different_summands.main()
         out, err = capfd.readouterr()
         assert "3\n1 2 5" in out
+
+    def test_45(self, mock_stdin, capfd):
+        mock_stdin.setvalue(45)
+        different_summands.main()
+        out, err = capfd.readouterr()
+        assert "9\n1 2 3 4 5 6 7 8 9" in out
+
+    def test_large_input(self, mock_stdin, capfd):
+        summands = self.unique_summands_upto_n(10 ** 9)
+        n_summands_str = str(len(summands))
+        summands_str = " ".join((str(s) for s in summands))
+        mock_stdin.setvalue(sum(summands))
+        different_summands.main()
+        out, err = capfd.readouterr()
+        assert n_summands_str + "\n" + summands_str in out
