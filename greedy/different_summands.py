@@ -6,7 +6,7 @@ def optimal_summands(n):
     summands = []
     k = n
     l = 1
-    # O(n) algorithm
+    # O(logn) algorithm
     while k > 0:
         s = k if k <= 2 * l else l
         summands.append(s)
