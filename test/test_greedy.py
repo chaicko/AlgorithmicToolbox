@@ -84,12 +84,12 @@ class TestDotProduct:
 
 class TestCoveringSegments:
     def test_sample1(self, mock_stdin, capfd):
-        mock_stdin.setvalue(3, [1, 6], [2, 5], [3, 6])
+        mock_stdin.setvalue(3, [1, 3], [2, 5], [3, 6])
         covering_segments.main()
         out, err = capfd.readouterr()
         assert "1\n3" in out
 
-    def test_sample1(self, mock_stdin, capfd):
+    def test_sample2(self, mock_stdin, capfd):
         mock_stdin.setvalue(4, [4, 7], [1, 3], [2, 5], [5, 6])
         covering_segments.main()
         out, err = capfd.readouterr()
