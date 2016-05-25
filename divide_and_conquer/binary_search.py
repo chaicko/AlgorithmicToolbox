@@ -30,8 +30,7 @@ def main():
     m = data[n + 1]
     a = data[1: n + 1]
     for x in data[n + 2:]:
-        # replace with the call to binary_search when implemented
-        print(linear_search(a, x), end=' ')
+        print(binary_search(a, x), end=' ')
 
 
 if __name__ == '__main__':
