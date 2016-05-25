@@ -12,17 +12,23 @@ class TestBinarySearch:
         (([5, 1, 5, 8, 12, 13], [5, 8, 1, 23, 1, 11]), "2 0 -1 0 -1")
     ])
     def test_sample(self, test_input, expected, main_runner):
-        result = main_runner(binary_search, test_input)
-        assert expected in result
+        assert expected in main_runner(binary_search, test_input)
+
+    def test_worst_case(self):
+        a = [i for i in range(10 ** 5)]
+        for x in range(len(a), len(a) + 10 ** 5):
+            assert -1 == binary_search.binary_search(a, x)
 
 
-@pytest.mark.skip(reason="TODO")
+@pytest.mark.skip(reason="Working with Binary search first")
 class TestInversions:
-    def test_sample1(self, mock_stdin, capfd):
-        mock_stdin.setvalue(5, [2, 3, 9, 2, 2])
-        inversions.main()
-        out, err = capfd.readouterr()
-        assert "1" in out
+    @pytest.mark.parametrize("test_input,expected", [
+        (([5], [2, 3, 9, 2, 2]), "1"),
+        (([4], [1, 2, 3, 4]), "0"),
+        (([4], [1, 2, 3, 1]), "0")
+    ])
+    def test_samples(self, test_input, expected, main_runner):
+        assert expected in main_runner(inversions, test_input)
 
 
 @pytest.mark.skip(reason="TODO")
