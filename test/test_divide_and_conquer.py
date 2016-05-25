@@ -16,6 +16,18 @@ class TestBinarySearch:
 
     def test_worst_case(self):
         a = [i for i in range(10 ** 5)]
+        assert len(a) - 1 == binary_search.binary_search(a, a[-1])
+
+    def test_middle_element_even(self):
+        a = [i for i in range(10 ** 5)]
+        assert len(a) // 2 == binary_search.binary_search(a, a[len(a) // 2])
+
+    def test_middle_element_odd(self):
+        a = [i for i in range(10 ** 5 - 1)]
+        assert len(a) // 2 == binary_search.binary_search(a, a[len(a) // 2])
+
+    def test_worst_problem_size(self):
+        a = [i for i in range(10 ** 5)]
         for x in range(len(a), len(a) + 10 ** 5):
             assert -1 == binary_search.binary_search(a, x)
 

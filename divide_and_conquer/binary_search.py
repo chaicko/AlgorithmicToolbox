@@ -3,9 +3,16 @@ import sys
 
 
 def binary_search(a, x):
-    # left, right = 0, len(a)
-    # write your code here
-    return linear_search(a, x)
+    left, right = 0, len(a)
+    while left < right:
+        mid = left + (right - left) // 2
+        if a[mid] == x:
+            return mid
+        elif x < a[mid]:
+            right = mid - 1
+        else:
+            left = mid + 1
+    return -1
 
 
 def linear_search(a, x):
