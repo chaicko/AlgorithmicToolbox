@@ -2,25 +2,40 @@
 import sys
 
 
-def get_majority_element_sorted(a, left, right):
-    sorted_a = sorted(a)
-    size = right - left
-    half = size // 2
+def get_majority_element(a, left, right):
+    if left == right:
+        return -1
+    if left + 1 == right:
+        return a[left]
 
-    # Check the first half of the array. If the same element is at the
-    # beginning and the middle, then is a majority
-    if sorted_a[left] == sorted_a[left + half]:
-        return sorted_a[left]
+    # First divide the Array in 2 halves, and call recursively on this.
+    # These calls are the 2*T(n/2) part (log n) of the master theorem
+    half = (right - left) // 2
+    ml = get_majority_element(a, left, left + half)
+    mr = get_majority_element(a, left + half, right)
 
-    # Check again but for biggest sorted element, take care of indexes
-    sub = 1 if size % 2 == 0 else 0
-    if sorted_a[left + half - sub] == sorted_a[right - 1]:
-        return sorted_a[right - 1]
+    # ml/mr at this point are numbers or -1. Because -1 is not part of the
+    # problem we can safely compare the numbers with the part of the array
+    # that we are evaluating at this point (a[left:right)
+    mlc = mrc = 0
+    for v in a[left:right]:
+        if v == ml:
+            mlc += 1
+        if v == mr:
+            mrc += 1
 
+    # Finally if the count adds up to more than the half of the array being
+    # evaluated, then return that majority number
+    if mlc > half:
+        return ml
+    if mrc > half:
+        return mr
+
+    # If is not a majority number, then return not found
     return -1
 
 
-def get_majority_element(a, left, right):
+def get_majority_element_linear(a, left, right):
     if left == right:
         return -1
     if left + 1 == right:
