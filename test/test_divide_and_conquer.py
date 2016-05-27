@@ -113,6 +113,11 @@ class TestMajorityElement:
         expected = "0"
         assert expected in main_runner(majority_element, test_input)
 
+    def test_majority_is_biggest(self, main_runner):
+        test_input = ([5], [0, 2, 0, 2, 2])
+        expected = "1"
+        assert expected in main_runner(majority_element, test_input)
+
 
 @pytest.mark.skip(reason="TODO")
 class TestPointsAndSegments:

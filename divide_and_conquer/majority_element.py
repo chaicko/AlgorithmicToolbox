@@ -3,15 +3,19 @@ import sys
 
 
 def get_majority_element_sorted(a, left, right):
-    if left == right:
-        return -1
-    if left + 1 == right:
-        return a[left]
-
     sorted_a = sorted(a)
-    cmp_idx = right // 2
-    if sorted_a[left] == sorted_a[cmp_idx]:
-        return 1
+    size = right - left
+    half = size // 2
+
+    # Check the first half of the array. If the same element is at the
+    # beginning and the middle, then is a majority
+    if sorted_a[left] == sorted_a[left + half]:
+        return sorted_a[left]
+
+    # Check again but for biggest sorted element, take care of indexes
+    sub = 1 if size % 2 == 0 else 0
+    if sorted_a[left + half - sub] == sorted_a[right - 1]:
+        return sorted_a[right - 1]
 
     return -1
 
