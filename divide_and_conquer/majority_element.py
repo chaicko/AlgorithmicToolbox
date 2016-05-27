@@ -3,10 +3,13 @@ import sys
 
 
 def get_majority_element_sorted(a, left, right):
+    if left == right:
+        return -1
+    if left + 1 == right:
+        return a[left]
+
     sorted_a = sorted(a)
     cmp_idx = right // 2
-    if right % 2 == 0:
-        cmp_idx += 1
     if sorted_a[left] == sorted_a[cmp_idx]:
         return 1
 

@@ -38,7 +38,7 @@ class TestBinarySearch:
         assert expected in main_runner(binary_search, test_input)
 
 
-@pytest.mark.skip(reason="Working with Binary search first")
+@pytest.mark.skip(reason="TODO")
 class TestInversions:
     @pytest.mark.parametrize("test_input,expected", [
         (([5], [2, 3, 9, 2, 2]), "1"),
@@ -48,8 +48,14 @@ class TestInversions:
     def test_samples(self, test_input, expected, main_runner):
         assert expected in main_runner(inversions, test_input)
 
+    def test_3_grader(self, main_runner):
+        test_input = ([10],
+                      [2, 124554847, 2, 941795895, 2, 2, 2, 2, 792755190,
+                       756617003])
+        expected = "1"
+        assert expected in main_runner(inversions, test_input)
 
-@pytest.mark.skip(reason="Not paassing on graaader yet")
+
 class TestMajorityElement:
     @pytest.mark.parametrize("test_input,expected", [
         (([5], [2, 3, 9, 2, 2]), "1"),
@@ -57,6 +63,54 @@ class TestMajorityElement:
         (([4], [1, 2, 3, 1]), "0")
     ])
     def test_sample(self, test_input, expected, main_runner):
+        assert expected in main_runner(majority_element, test_input)
+
+    def test_3_grader(self, main_runner):
+        test_input = ([10],
+                      [2, 124554847, 2, 941795895, 2, 2, 2, 2, 792755190,
+                       756617003])
+        expected = "1"
+        assert expected in main_runner(majority_element, test_input)
+
+    def test_one_element(self, main_runner):
+        test_input = ([1], [1])
+        expected = "1"
+        assert expected in main_runner(majority_element, test_input)
+
+    def test_two_different_elements(self, main_runner):
+        test_input = ([2], [1, 2])
+        expected = "0"
+        assert expected in main_runner(majority_element, test_input)
+
+    def test_two_equal_elements(self, main_runner):
+        test_input = ([2], [2, 2])
+        expected = "1"
+        assert expected in main_runner(majority_element, test_input)
+
+    def test_worst_case_equals(self, main_runner):
+        l = [10 ** 9] * (10 ** 5)
+        test_input = (len(l), l)
+        expected = "1"
+        assert expected in main_runner(majority_element, test_input)
+
+    def test_big_input_majority_corner_case(self, main_runner):
+        import random
+        l = [random.randint(0, 10 ** 9) for _ in range((10 ** 5) // 2 - 1)] + \
+            ([1] * ((10 ** 5) // 2 + 1))
+        assert len(l) == 10 ** 5
+
+        test_input = (len(l), l)
+        expected = "1"
+        assert expected in main_runner(majority_element, test_input)
+
+    def test_big_input_no_majority_corner_case(self, main_runner):
+        import random
+        l = [random.randint(0, 10 ** 9) for _ in range((10 ** 5) // 2)] + \
+            ([1] * ((10 ** 5) // 2))
+        assert len(l) == 10 ** 5
+
+        test_input = (len(l), l)
+        expected = "0"
         assert expected in main_runner(majority_element, test_input)
 
 
