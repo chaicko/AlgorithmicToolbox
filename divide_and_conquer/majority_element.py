@@ -25,19 +25,32 @@ def get_majority_element(a, left, right):
         return -1
     if left + 1 == right:
         return a[left]
-    # size = right - left
-    # half = size // 2
-    # r1 = get_majority_element(a, left, left + half)
-    # r2 = get_majority_element(a, left + half, right)
-    # if r1 == r2:
-    #     return r1
+
+    # Implementing it using a dictionary in O(n) (actually O(2*n))
+    d = {}
+
+    # The Dictionary value are { number: count } where we just count the number
+    # of times a given number of the sequence appear
+    for num in a:
+        try:
+            d[num] += 1
+        except KeyError:
+            d[num] = 1
+
+    # Then we iterate over the all the keys of the dictionary (numbers). If
+    # the count of each key is more than half the size of the array then the
+    # number is a majority element and we return its value
+    for k, v in d.items():
+        if v > len(a) / 2:
+            return k
+
     return -1
 
 
 def main():
     input = sys.stdin.read()
     n, *a = list(map(int, input.split()))
-    if get_majority_element_sorted(a, 0, n) != -1:
+    if get_majority_element(a, 0, n) != -1:
         print(1)
     else:
         print(0)
