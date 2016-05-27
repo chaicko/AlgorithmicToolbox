@@ -4,8 +4,10 @@ import sys
 
 def binary_search(a, x):
     left, right = 0, len(a)
-    while left < right:
+    while left <= right:
         mid = left + (right - left) // 2
+        if mid == len(a):
+            return -1
         d = a[mid] - x
         if d == 0:
             return mid

@@ -31,6 +31,12 @@ class TestBinarySearch:
         for x in range(len(a), len(a) + 10 ** 5):
             assert -1 == binary_search.binary_search(a, x)
 
+    def test_2_grader(self, main_runner):
+        test_input = ([10, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+                      [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+        expected = "-1 0 1 2 3 4 5 6 7 8 9 -1"
+        assert expected in main_runner(binary_search, test_input)
+
 
 @pytest.mark.skip(reason="Working with Binary search first")
 class TestInversions:
@@ -43,6 +49,7 @@ class TestInversions:
         assert expected in main_runner(inversions, test_input)
 
 
+@pytest.mark.skip(reason="Not paassing on graaader yet")
 class TestMajorityElement:
     @pytest.mark.parametrize("test_input,expected", [
         (([5], [2, 3, 9, 2, 2]), "1"),
