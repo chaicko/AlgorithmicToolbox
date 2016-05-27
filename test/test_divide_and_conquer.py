@@ -43,13 +43,14 @@ class TestInversions:
         assert expected in main_runner(inversions, test_input)
 
 
-@pytest.mark.skip(reason="TODO")
 class TestMajorityElement:
-    def test_sample1(self, mock_stdin, capfd):
-        mock_stdin.setvalue(1, 23, 39)
-        majority_element.main()
-        out, err = capfd.readouterr()
-        assert out == "897\n"
+    @pytest.mark.parametrize("test_input,expected", [
+        (([5], [2, 3, 9, 2, 2]), "1"),
+        (([4], [1, 2, 3, 4]), "0"),
+        (([4], [1, 2, 3, 1]), "0")
+    ])
+    def test_sample(self, test_input, expected, main_runner):
+        assert expected in main_runner(majority_element, test_input)
 
 
 @pytest.mark.skip(reason="TODO")
