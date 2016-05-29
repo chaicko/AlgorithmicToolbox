@@ -128,10 +128,16 @@ class TestPointsAndSegments:
         assert "1\n3" in out
 
 
-@pytest.mark.skip(reason="TODO")
+@pytest.mark.timeout(10)  # 10 seconds timeout for binary this tests
 class TestSorting:
-    def test_sample1(self, mock_stdin, capfd):
-        mock_stdin.setvalue(6)
-        sorting.main()
-        out, err = capfd.readouterr()
-        assert "3\n1 2 3" in out
+    @pytest.mark.parametrize("test_input,expected", [
+        (([5], [2, 3, 9, 2, 2]), "2 2 2 3 9")
+    ])
+    def test_samples(self, test_input, expected, main_runner):
+        assert expected in main_runner(sorting, test_input)
+
+    def test_all_equal_elements(self, main_runner):
+        a = [3] * 10 ** 5
+        test_input = (len(a), a)
+        expected = " ".join((str(x) for x in a))
+        assert expected in main_runner(sorting, test_input)
