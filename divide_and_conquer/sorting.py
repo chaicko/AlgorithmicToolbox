@@ -4,8 +4,23 @@ import random
 
 
 def partition3(a, l, r):
-    # write your code here
-    pass
+    x = a[l]
+    j = l  # count the lower bound
+    k = 0  # upper bound is j + k
+    for i in range(l + 1, r + 1):
+        if a[i] <= x:
+            if a[i] < x:
+                # Same as partition2, just increment lower bound and swap
+                j += 1
+                a[i], a[j] = a[j], a[i]
+            else:
+                # if value is equal then increment size of equal segment
+                k += 1
+            # Final swap needed to add again the equal element removed on the
+            # first swap that is now at index i
+            a[i], a[j + k] = a[j + k], a[i]
+    a[l], a[j] = a[j], a[l]
+    return j, j + k
 
 
 def partition2(a, l, r):

@@ -141,3 +141,10 @@ class TestSorting:
         test_input = (len(a), a)
         expected = " ".join((str(x) for x in a))
         assert expected in main_runner(sorting, test_input)
+
+    def test_partition3_basic(self):
+        a = [5, 4, 5, 5, 3, 5, 8, 1]
+        m1, m2 = sorting.partition3(a, 0, len(a) - 1)
+        assert m1 == 3
+        assert m2 == 6
+        assert a == [1, 4, 3, 5, 5, 5, 5, 8]
