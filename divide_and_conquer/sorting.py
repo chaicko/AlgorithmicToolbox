@@ -45,6 +45,16 @@ def randomized_quick_sort(a, l, r):
     randomized_quick_sort(a, m + 1, r)
 
 
+def randomized_quick_sort3(a, l, r):
+    if l >= r:
+        return
+    k = random.randint(l, r)
+    a[l], a[k] = a[k], a[l]
+    m1, m2 = partition3(a, l, r)
+    randomized_quick_sort3(a, l, m1 - 1)
+    randomized_quick_sort3(a, m2 + 1, r)
+
+
 def main():
     input = sys.stdin.read()
     n, *a = list(map(int, input.split()))
