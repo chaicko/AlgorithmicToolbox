@@ -142,6 +142,12 @@ class TestSorting:
         expected = " ".join((str(x) for x in reversed(a)))
         assert expected in main_runner(sorting, test_input)
 
+    def test_randomized_quick_sort2_inverted_sequence(self):
+        a = [x for x in reversed(range(1, 10 ** 5 + 1))]
+        expected = a[::-1]
+        sorting.randomized_quick_sort(a, 0, len(a) - 1)
+        assert expected == a
+
     def test_all_equal_elements(self, main_runner):
         a = [3] * 10 ** 5
         test_input = (len(a), a)
