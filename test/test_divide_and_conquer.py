@@ -149,11 +149,11 @@ class TestSorting:
         assert expected == a
 
     def test_randomized_quick_sort3_inverted_sequence(self):
-        # a = [x for x in reversed(range(1, 10 ** 5 + 1))]
-        a = [x for x in reversed(range(1, 21))]
-        expected = a[::-1]
-        sorting.randomized_quick_sort3(a, 0, len(a) - 1)
-        assert expected == a
+        a1 = [x for x in reversed(range(1, 10 ** 5 + 1))]
+        a2 = list(a1)
+        sorting.randomized_quick_sort(a1, 0, len(a1) - 1)
+        sorting.randomized_quick_sort3(a2, 0, len(a2) - 1)
+        assert a1 == a2
 
     @pytest.mark.skip(reason="TODO")
     def test_all_equal_elements(self, main_runner):
@@ -168,3 +168,29 @@ class TestSorting:
         assert m1 == 3
         assert m2 == 6
         assert a == [1, 4, 3, 5, 5, 5, 5, 8]
+
+    def test_partition3_three_simple(self):
+        a = [2, 3, 1]
+        expected = list(a)
+        m = sorting.partition2(expected, 0, len(expected) - 1)
+        m1, m2 = sorting.partition3(a, 0, len(a) - 1)
+        assert m1 == m
+        assert m2 == m
+        assert a == expected
+
+    def test_partition3_reversed(self):
+        a = [x for x in reversed(range(1, 10))]
+        expected = list(a)
+        expected[0], expected[-1] = expected[-1], expected[0]
+        m1, m2 = sorting.partition3(a, 0, len(a) - 1)
+        assert m1 == len(a) - 1
+        assert m2 == len(a) - 1
+        assert a == expected
+
+    def test_partition2_reversed(self):
+        a = [x for x in reversed(range(1, 10))]
+        expected = list(a)
+        expected[0], expected[-1] = expected[-1], expected[0]
+        m = sorting.partition2(a, 0, len(a) - 1)
+        assert m == len(a) - 1
+        assert a == expected
