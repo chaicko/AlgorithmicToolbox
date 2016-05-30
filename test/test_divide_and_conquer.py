@@ -148,6 +148,14 @@ class TestSorting:
         sorting.randomized_quick_sort(a, 0, len(a) - 1)
         assert expected == a
 
+    def test_randomized_quick_sort3_inverted_sequence(self):
+        # a = [x for x in reversed(range(1, 10 ** 5 + 1))]
+        a = [x for x in reversed(range(1, 21))]
+        expected = a[::-1]
+        sorting.randomized_quick_sort3(a, 0, len(a) - 1)
+        assert expected == a
+
+    @pytest.mark.skip(reason="TODO")
     def test_all_equal_elements(self, main_runner):
         a = [3] * 10 ** 5
         test_input = (len(a), a)
