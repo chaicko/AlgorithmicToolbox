@@ -136,6 +136,12 @@ class TestSorting:
     def test_samples(self, test_input, expected, main_runner):
         assert expected in main_runner(sorting, test_input)
 
+    def test_should_sort_inverted_sequence(self, main_runner):
+        a = [x for x in reversed(range(1, 10 ** 5 + 1))]
+        test_input = (len(a), a)
+        expected = " ".join((str(x) for x in reversed(a)))
+        assert expected in main_runner(sorting, test_input)
+
     def test_all_equal_elements(self, main_runner):
         a = [3] * 10 ** 5
         test_input = (len(a), a)
