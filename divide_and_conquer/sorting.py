@@ -57,7 +57,7 @@ def randomized_quick_sort3(a, l, r):
 def main():
     input = sys.stdin.read()
     n, *a = list(map(int, input.split()))
-    randomized_quick_sort(a, 0, n - 1)
+    randomized_quick_sort3(a, 0, n - 1)
     for x in a:
         print(x, end=' ')
 

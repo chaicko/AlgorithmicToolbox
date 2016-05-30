@@ -155,7 +155,6 @@ class TestSorting:
         sorting.randomized_quick_sort3(a2, 0, len(a2) - 1)
         assert a1 == a2
 
-    @pytest.mark.skip(reason="TODO")
     def test_all_equal_elements(self, main_runner):
         a = [3] * 10 ** 5
         test_input = (len(a), a)
