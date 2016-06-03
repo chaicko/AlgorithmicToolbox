@@ -33,3 +33,14 @@ def mock_stdin(request):
 
     request.addfinalizer(fin)
     return mock_stdin_
+
+
+@pytest.fixture()
+def main_runner(mock_stdin, capfd):
+    def run(module_name, test_input):
+        mock_stdin.setvalue(*test_input)
+        module_name.main()
+        out, err = capfd.readouterr()
+        return out
+
+    return run
