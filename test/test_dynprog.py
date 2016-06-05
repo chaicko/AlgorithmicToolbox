@@ -17,7 +17,7 @@ class TestKnapsack:
 class TestEditDistance:
     @pytest.mark.parametrize("test_input,expected", [
         (("ab", "ab"), 0),
-        (("shorts", "ports"), 3),
+        (("short", "ports"), 3),
         (("editing", "distance"), 5)
     ])
     def test_samples(self, test_input, expected):
