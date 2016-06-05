@@ -24,11 +24,7 @@ def optimal_weight(W, w):
     return K[W][n]
 
 
-def main():
+if __name__ == '__main__':
     input = sys.stdin.read()
     W, n, *w = list(map(int, input.split()))
     print(optimal_weight(W, w))
-
-
-if __name__ == '__main__':
-    main()
