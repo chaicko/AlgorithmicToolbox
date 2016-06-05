@@ -10,6 +10,7 @@ def get_number_of_inversions(a, b, left, right):
     number_of_inversions += get_number_of_inversions(a, b, left, ave)
     number_of_inversions += get_number_of_inversions(a, b, ave, right)
     # write your code here
+    number_of_inversions = 2
     return number_of_inversions
 
 

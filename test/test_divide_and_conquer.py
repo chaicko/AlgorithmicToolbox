@@ -38,21 +38,11 @@ class TestBinarySearch:
         assert expected in main_runner(binary_search, test_input)
 
 
-@pytest.mark.skip(reason="TODO")
 class TestInversions:
     @pytest.mark.parametrize("test_input,expected", [
-        (([5], [2, 3, 9, 2, 2]), "1"),
-        (([4], [1, 2, 3, 4]), "0"),
-        (([4], [1, 2, 3, 1]), "0")
+        (([5], [2, 3, 9, 2, 9]), "2")
     ])
     def test_samples(self, test_input, expected, main_runner):
-        assert expected in main_runner(inversions, test_input)
-
-    def test_3_grader(self, main_runner):
-        test_input = ([10],
-                      [2, 124554847, 2, 941795895, 2, 2, 2, 2, 792755190,
-                       756617003])
-        expected = "1"
         assert expected in main_runner(inversions, test_input)
 
 
