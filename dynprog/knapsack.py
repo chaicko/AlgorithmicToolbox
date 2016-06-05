@@ -15,12 +15,11 @@ def optimal_weight(W, w):
         wj = w[j - 1]
         vj = wj  # lets take the value to be the same as the weight
         for x in range(1, W + 1):
-            K[x][j] = K[x][j - 1]  # for a bag of weight x we use j-1 items
-            if wj <= x:  # if item weight is at most the current knapsack
-                # compute the value we get if using item j, for knapsack x
-                val = K[x - wj][j - 1] + vj
-                if K[x][j] < val:  # if value is greater when using it
-                    K[x][j] = val  # use it
+            if wj > x:  # if item weight is more than current knapsack x
+                # Then we do not use it
+                K[x][j] = K[x][j - 1]
+            else:  # we might use if its value is higher
+                K[x][j] = max(K[x][j - 1], K[x - wj][j - 1] + vj)
 
     return K[W][n]
 
