@@ -7,13 +7,15 @@ import pytest
 @pytest.mark.timeout(10)  # 10 seconds timeout for this tests
 class TestKnapsack:
     @pytest.mark.parametrize("test_input,expected", [
-        (([10, 3], [1, 4, 8]), "9")
+        ((10, [1, 4, 8]), 9)
     ])
-    def test_sample(self, test_input, expected, main_runner):
-        assert expected in main_runner(knapsack, test_input)
+    def test_sample(self, test_input, expected):
+        W = test_input[0]
+        w = test_input[1]
+        assert expected == knapsack.optimal_weight(W, w)
 
 
-@pytest.mark.timeout(5)  # 10 seconds timeout for this tests
+@pytest.mark.timeout(5)  # 5 seconds timeout for this tests
 class TestEditDistance:
     @pytest.mark.parametrize("test_input,expected", [
         (("ab", "ab"), 0),
