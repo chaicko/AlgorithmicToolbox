@@ -37,6 +37,18 @@ class TestBinarySearch:
         expected = "-1 0 1 2 3 4 5 6 7 8 9 -1"
         assert expected in main_runner(binary_search, test_input)
 
+    def test_linear_vs_binary(self):
+        a = [i for i in range(20)]
+        for i, x in enumerate(a):
+            lin_r = binary_search.linear_search(a, x)
+            assert i == lin_r
+            bin_r = binary_search.binary_search(a, x)
+            assert i == bin_r
+        lin_r = binary_search.linear_search(a, a[-1] + 1)
+        assert -1 == lin_r
+        bin_r = binary_search.binary_search(a, a[-1] + 1)
+        assert -1 == bin_r
+
 
 class TestInversions:
     @pytest.mark.parametrize("test_input,expected", [
@@ -108,17 +120,39 @@ class TestMajorityElement:
         expected = "1"
         assert expected in main_runner(majority_element, test_input)
 
+    def test_linear_basic_cases(self):
+        a = [1, 2]
+        res_lin = majority_element.get_majority_element_linear(a, 0, 1)
+        assert res_lin == a[0]
+        assert -1 == majority_element.get_majority_element_linear(a, 0, 0)
+        assert -1 == majority_element.get_majority_element_linear(a, 0, len(a))
 
-@pytest.mark.skip(reason="TODO")
+    def test_recursive_basic_cases(self):
+        a = [1, 2]
+        res_lin = majority_element.get_majority_element(a, 0, 1)
+        assert res_lin == a[0]
+        assert -1 == majority_element.get_majority_element(a, 0, 0)
+        assert -1 == majority_element.get_majority_element(a, 0, len(a))
+
+    def test_linear_vs_recursive(self):
+        a = (2, 124554847, 2, 941795895, 2, 2, 2, 2, 792755190, 756617003)
+        res_lin = majority_element.get_majority_element_linear(a, 0, len(a))
+        res_rec = majority_element.get_majority_element(a, 0, len(a))
+        assert res_lin == res_rec
+
+
+@pytest.mark.timeout(15)
 class TestPointsAndSegments:
-    def test_sample1(self, mock_stdin, capfd):
-        mock_stdin.setvalue(3, [1, 6], [2, 5], [3, 6])
-        points_and_segments.main()
-        out, err = capfd.readouterr()
-        assert "1\n3" in out
+    @pytest.mark.parametrize("test_input,expected", [
+        (([2, 3], [0, 5], [7, 10], [1, 6, 11]), "1 0 0"),
+        (([1, 3], [-10, 10], [-100, 100, 0]), "0 0 1"),
+        (([3, 2], [0, 5], [-3, 2], [7, 10], [1, 6]), "2 0")
+    ])
+    def test_samples(self, test_input, expected, main_runner):
+        assert expected in main_runner(points_and_segments, test_input)
 
 
-@pytest.mark.timeout(10)  # 10 seconds timeout for binary this tests
+@pytest.mark.timeout(10)  # 10 seconds timeout for sorting tests
 class TestSorting:
     @pytest.mark.parametrize("test_input,expected", [
         (([5], [2, 3, 9, 2, 2]), "2 2 2 3 9")
