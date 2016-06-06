@@ -33,6 +33,7 @@ class TestEditDistance:
 class TestPlacingParenthesis:
     @pytest.mark.parametrize("test_input,expected", [
         ("1+5", 6),
+        ("5-8+7*4-8+9", 200)
     ])
     def test_samples(self, test_input, expected):
         assert expected == placing_parentheses.get_maximum_value(test_input)
