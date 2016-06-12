@@ -1,7 +1,7 @@
 import data_structures.basic.check_brackets as check_brackets
 
 import pytest
-
+import os
 
 @pytest.mark.timeout(1)  # 1 second timeout for this tests
 class TestCheckBrackets:
@@ -59,3 +59,11 @@ class TestCheckBrackets:
         test_input = ["foo(bar[i);"]
         expected = "10"
         assert expected in main_runner(check_brackets, test_input)
+
+        # def test_provided_input_data(self, main_runner):
+        #     files = [f for f in os.listdir('./check_brackets_test_input') if os.path.isfile(f)]
+        #     for file in files:
+        #         with open(file) as f:
+        #             test_input = [f.readline()]
+        #             expected = "Success"
+        #             assert expected in main_runner(check_brackets, test_input)
