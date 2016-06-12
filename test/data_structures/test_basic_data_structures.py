@@ -1,9 +1,11 @@
-import data_structures.basic.check_brackets as check_brackets
-import data_structures.basic.tree_height as tree_height
-
-import pytest
+import resource
 import os
 import glob
+import sys
+
+import pytest
+import data_structures.basic.check_brackets as check_brackets
+import data_structures.basic.tree_height as tree_height
 
 
 @pytest.mark.timeout(1)  # 1 second timeout for this tests
@@ -83,6 +85,15 @@ class TestTreeHeight:
         test_input = [-1, 0, 4, 0, 3]
         tree = tree_height.TreeHeight(len(test_input), test_input)
         assert 4 == tree.compute_height()
+
+    def test_worst_case(self):
+        sys.setrecursionlimit(10 ** 7)  # max depth of recursion
+        resource.setrlimit(resource.RLIMIT_STACK,
+                           (resource.RLIM_INFINITY, resource.RLIM_INFINITY))
+        #  Worst case is a tree with one child per node, that is, a list
+        test_input = [-1 if x == 0 else x - 1 for x in range(10 ** 5)]
+        tree = tree_height.TreeHeight(len(test_input), test_input)
+        assert len(test_input) == tree.compute_height()
 
         # def test_provided_input_data(self):
         #     files_wildcard = os.path.dirname(__file__) + "/tree_height_test_input/*"

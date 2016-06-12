@@ -11,27 +11,56 @@ class TreeHeight:
     def __init__(self, size=0, parent=[]):
         self.n = size
         self.parent = parent
+        self.tree = {}
 
-    def read(self):
-        self.n = int(sys.stdin.readline())
-        self.parent = list(map(int, sys.stdin.readline().split()))
+    def build_tree(self):
+        """
+        This method creates a dictionary whose keys
+        are the index of a subtree and whose values are lists of the
+        childs for the given subtree. The root of the whole tree has key -1.
+        For example:
+        {
+            -1: [1],
+            1: [3, 4]
+            4: [0, 2]
+        }
+        Is the following tree:
+                [1]
+            [3]    [4]
+                 [0] [2]
+        """
+        for i, n in enumerate(self.parent):
+            if n not in self.tree:
+                self.tree[n] = []
+
+            self.tree[n] += [i]  # append index
+
+    def height(self, key):
+        """
+        Computes the height of a given subtree with root 'key'.
+        :param key:
+        :return:
+        """
+        if key not in self.tree:
+            return 0
+
+        mx = 0
+        for k in self.tree[key]:
+            # We have to compute the height of all child subtrees and pick the
+            # one with max depth
+            mx = max(mx, self.height(k))
+        return 1 + mx
 
     def compute_height(self):
-        # Replace this code with a faster implementation
-        maxHeight = 0
-        for vertex in range(self.n):
-            height = 0
-            i = vertex
-            while i != -1:
-                height += 1
-                i = self.parent[i]
-            maxHeight = max(maxHeight, height)
-        return maxHeight
+        self.build_tree()
+        max_height = self.height(-1)  # compute height starting from root
+        return max_height
 
 
 def main():
-    tree = TreeHeight()
-    tree.read()
+    n = int(sys.stdin.readline())
+    parent = list(map(int, sys.stdin.readline().split()))
+    tree = TreeHeight(n, parent)
     print(tree.compute_height())
 
 
