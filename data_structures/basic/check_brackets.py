@@ -25,13 +25,24 @@ def main():
     for i, next in enumerate(text):
         if next == '(' or next == '[' or next == '{':
             # Process opening bracket, write your code here
-            pass
+            opening_brackets_stack.append(Bracket(next, i + 1))
 
         if next == ')' or next == ']' or next == '}':
             # Process closing bracket, write your code here
-            pass
+            if len(opening_brackets_stack) == 0:
+                print(i + 1)
+                return
+            b = opening_brackets_stack.pop()
+            if not b.Match(next):
+                print(i + 1)
+                return
 
-            # Printing answer, write your code here
+    # Printing answer
+    try:
+        b = opening_brackets_stack.pop()
+        print(b.position)
+    except IndexError:
+        print("Success")
 
 
 if __name__ == "__main__":
