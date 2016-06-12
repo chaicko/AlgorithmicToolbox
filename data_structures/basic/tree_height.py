@@ -8,6 +8,10 @@ threading.stack_size(2 ** 25)  # new thread will get stack of such size
 
 
 class TreeHeight:
+    def __init__(self, size=0, parent=[]):
+        self.n = size
+        self.parent = parent
+
     def read(self):
         self.n = int(sys.stdin.readline())
         self.parent = list(map(int, sys.stdin.readline().split()))
@@ -31,4 +35,5 @@ def main():
     print(tree.compute_height())
 
 
-threading.Thread(target=main).start()
+if __name__ == "__main__":
+    threading.Thread(target=main).start()
