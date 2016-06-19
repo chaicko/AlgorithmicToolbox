@@ -32,14 +32,6 @@ def max_pairwise_prod(a: list) -> int:
     return max_values[0] * max_values[1]
 
 
-def stress_testing():
-    """Performs a progressive stress testing for the max_pairwise_function
-    :return:
-    """
-    for n in range(2, MAX_SEQ_LEN+1):
-        pass
-
-
 if __name__ == '__main__':
     m = int(input())
     arr = [int(x) for x in input().split()]
