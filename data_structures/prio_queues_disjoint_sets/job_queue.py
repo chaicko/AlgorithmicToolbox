@@ -41,15 +41,22 @@ class JobQueue:
             self._start_times = [0] * len(self._jobs)
             return
 
-        next_free_time = [0] * self._num_workers
-        for i in range(len(self._jobs)):
-            next_worker = 0
-            for j in range(self._num_workers):
-                if next_free_time[j] < next_free_time[next_worker]:
-                    next_worker = j
-            self._assigned_workers[i] = next_worker
-            self._start_times[i] = next_free_time[next_worker]
-            next_free_time[next_worker] += self._jobs[i]
+        # Create Heap
+        from collections import namedtuple
+        import heapq
+        MyThread = namedtuple('MyThread', 'start_time, id')
+        heap = [MyThread(0, i) for i in range(self._num_workers)]
+        heapq.heapify(heap)
+
+        for i, job in enumerate(self._jobs):
+            # Read the root contents
+            sched_thread_id = heap[0].id
+            sched_thread_start = heap[0].start_time
+            # Append to output
+            self._assigned_workers[i] = sched_thread_id
+            self._start_times[i] = sched_thread_start
+            # Update heap with next start time
+            heapq.heapreplace(heap, MyThread(sched_thread_start + job, sched_thread_id))
 
     def solve(self):
         self.read_data()
