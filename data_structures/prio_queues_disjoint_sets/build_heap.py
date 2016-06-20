@@ -39,8 +39,8 @@ class HeapBuilder:
             min_index = r
 
         if i != min_index:
-            self.data[i], self.data[min_index] = self.data[min_index], \
-                                                 self.data[i]
+            self._swaps.append((i, min_index))
+            self._data[i], self._data[min_index] = self._data[min_index], self._data[i]
 
         self.sift_down(min_index)
 
