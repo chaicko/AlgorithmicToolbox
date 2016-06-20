@@ -2,6 +2,7 @@ import pytest
 import data_structures.prio_queues_disjoint_sets.build_heap as build_heap
 import data_structures.prio_queues_disjoint_sets.job_queue as job_queue
 
+import random
 
 @pytest.mark.timeout(3)
 class TestBuildHeap:
@@ -29,6 +30,29 @@ class TestBuildHeap:
 
 @pytest.mark.timeout(6)
 class TestJobQueue:
+    @staticmethod
+    def naive_solution(num_workers=0, jobs=[]):
+        _assigned_workers = [None] * len(jobs)
+        _start_times = [None] * len(jobs)
+
+        # Trivial case
+        if len(jobs) <= num_workers:
+            _assigned_workers = [i for i in range(len(jobs))]
+            _start_times = [0] * len(jobs)
+            return _assigned_workers, _start_times
+
+        next_free_time = [0] * num_workers
+        for i in range(len(jobs)):
+            next_worker = 0
+            for j in range(num_workers):
+                if next_free_time[j] < next_free_time[next_worker]:
+                    next_worker = j
+            _assigned_workers[i] = next_worker
+            _start_times[i] = next_free_time[next_worker]
+            next_free_time[next_worker] += jobs[i]
+
+        return _assigned_workers, _start_times
+
     def test_sample1(self):
         jobs = [1, 2, 3, 4, 5]
         threads = 2
