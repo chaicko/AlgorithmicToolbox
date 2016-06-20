@@ -41,8 +41,7 @@ class HeapBuilder:
         if i != min_index:
             self._swaps.append((i, min_index))
             self._data[i], self._data[min_index] = self._data[min_index], self._data[i]
-
-        self.sift_down(min_index)
+            self.sift_down(min_index)
 
     def read_data(self):
         n = int(input())
@@ -55,18 +54,8 @@ class HeapBuilder:
             print(swap[0], swap[1])
 
     def generate_swaps(self):
-        # The following naive implementation just sorts
-        # the given sequence using selection sort algorithm
-        # and saves the resulting sequence of swaps.
-        # This turns the given array into a heap,
-        # but in the worst case gives a quadratic number of swaps.
-        #
-        # TODO: replace by a more efficient implementation
-        for i in range(len(self._data)):
-            for j in range(i + 1, len(self._data)):
-                if self._data[i] > self._data[j]:
-                    self._swaps.append((i, j))
-                    self._data[i], self._data[j] = self._data[j], self._data[i]
+        for i in range(len(self._data) // 2 - 1, -1, -1):
+            self.sift_down(i)
 
     def solve(self):
         self.read_data()
