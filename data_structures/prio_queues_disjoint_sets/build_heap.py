@@ -14,6 +14,36 @@ class HeapBuilder:
     def data(self):
         return self._data
 
+    @staticmethod
+    def parent(i):
+        return (i - 1) // 2
+
+    @staticmethod
+    def left_child(i):
+        return 2 * i + 1
+
+    @staticmethod
+    def right_child(i):
+        return 2 * i + 2
+
+    def sift_down(self, i):
+        size = len(self.data)
+        min_index = i
+
+        l = self.left_child(i)
+        if l < size and self.data[l] < self.data[min_index]:
+            min_index = l
+
+        r = self.right_child(i)
+        if r < size and self.data[r] < self.data[min_index]:
+            min_index = r
+
+        if i != min_index:
+            self.data[i], self.data[min_index] = self.data[min_index], \
+                                                 self.data[i]
+
+        self.sift_down(min_index)
+
     def read_data(self):
         n = int(input())
         self._data = [int(s) for s in input().split()]
