@@ -37,3 +37,13 @@ class TestJobQueue:
         assert jq.assigned_workers == [0, 1, 0, 1, 0]
         assert jq.start_times == [0, 0, 1, 2, 4]
 
+    def test_sample2(self):
+        jobs = [1] * 20
+        threads = 4
+        jq = job_queue.JobQueue(threads, jobs)
+        jq.assign_jobs()
+        exp_assigned_workers = [0, 1, 2, 3] * 5
+        exp_start_times = [0] * 4 + [1] * 4 + [2] * 4 + [3] * 4 + [4] * 4
+        assert jq.assigned_workers == exp_assigned_workers
+        assert jq.start_times == exp_start_times
+
