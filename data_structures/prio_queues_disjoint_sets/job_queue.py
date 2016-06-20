@@ -27,7 +27,7 @@ class JobQueue:
     def read_data(self):
         n, m = map(int, input().split())
         jobs = list(map(int, input().split()))
-        assert m == len(self._jobs)
+        assert m == len(jobs)
         self.__init__(n, jobs)
 
     def write_response(self):

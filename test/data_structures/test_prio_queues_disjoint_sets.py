@@ -82,7 +82,7 @@ class TestJobQueue:
         assert jq.start_times == exp_start_times
 
     def test_random_stress(self):
-        tests_amount = 1000
+        tests_amount = 100
         for _ in range(tests_amount):
             n = random.randrange(1, 50)
             m = random.randrange(1, 50)
