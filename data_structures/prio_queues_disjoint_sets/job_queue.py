@@ -35,7 +35,12 @@ class JobQueue:
             print(self._assigned_workers[i], self._start_times[i])
 
     def assign_jobs(self):
-        # TODO: replace this code with a faster algorithm.
+        # Trivial case
+        if self.jobs <= self.num_workers:
+            self._assigned_workers = [i for i in range(len(self._jobs))]
+            self._start_times = [0] * len(self._jobs)
+            return
+
         next_free_time = [0] * self._num_workers
         for i in range(len(self._jobs)):
             next_worker = 0

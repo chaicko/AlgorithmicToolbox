@@ -47,3 +47,13 @@ class TestJobQueue:
         assert jq.assigned_workers == exp_assigned_workers
         assert jq.start_times == exp_start_times
 
+    def test_more_workers_than_jobs(self):
+        jobs = [i+1 for i in range(6)]
+        threads = 8
+        jq = job_queue.JobQueue(threads, jobs)
+        jq.assign_jobs()
+        exp_assigned_workers = [i for i in range(len(jobs))]
+        exp_start_times = [0] * len(jobs)
+        assert jq.assigned_workers == exp_assigned_workers
+        assert jq.start_times == exp_start_times
+
