@@ -1,7 +1,6 @@
-import sys
-
 import pytest
 import data_structures.prio_queues_disjoint_sets.build_heap as build_heap
+import data_structures.prio_queues_disjoint_sets.job_queue as job_queue
 
 
 @pytest.mark.timeout(3)
@@ -26,3 +25,15 @@ class TestBuildHeap:
         heap.generate_swaps()
         self.check_heap(heap.data)
         assert len(heap.swaps) <= 4 * len(test_input)
+
+
+@pytest.mark.timeout(6)
+class TestJobQueue:
+    def test_sample1(self):
+        jobs = [1, 2, 3, 4, 5]
+        threads = 2
+        jq = job_queue.JobQueue(threads, jobs)
+        jq.assign_jobs()
+        assert jq.assigned_workers == [0, 1, 0, 1, 0]
+        assert jq.start_times == [0, 0, 1, 2, 4]
+
