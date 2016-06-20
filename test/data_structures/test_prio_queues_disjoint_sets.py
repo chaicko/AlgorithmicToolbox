@@ -81,3 +81,16 @@ class TestJobQueue:
         assert jq.assigned_workers == exp_assigned_workers
         assert jq.start_times == exp_start_times
 
+    def test_random_stress(self):
+        tests_amount = 1000
+        for _ in range(tests_amount):
+            n = random.randrange(1, 50)
+            m = random.randrange(1, 50)
+            jobs = [random.randrange(1, 10) for _ in range(m)]
+            exp_assigned_workers, exp_start_times = self.naive_solution(n, jobs)
+
+            jq = job_queue.JobQueue(n, jobs)
+            jq.assign_jobs()
+            assert jq.assigned_workers == exp_assigned_workers
+            assert jq.start_times == exp_start_times
+
