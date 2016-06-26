@@ -124,8 +124,38 @@ class TestPhoneBook:
 
 @pytest.mark.timeout(7)
 class TestHashChains:
-    def test_sample1(self):
-        pass
+    @pytest.mark.parametrize("buck_size,test_data", [
+        (5, (
+                ("add world", None),
+                ("add HellO", None),
+                ("check 4", "HellO world"),
+                ("find World", "no"),
+                ("find world", "yes"),
+                ("del world", None),
+                ("check 4", "HellO"),
+                ("del HellO", None),
+                ("add luck", None),
+                ("add GooD", None),
+                ("check 2", "GooD luck"),
+                ("del good", None)
+        )),
+        (4, (
+                ("add test", None),
+                ("add test", None),
+                ("find test", "yes"),
+                ("del test", None),
+                ("find test", "no"),
+                ("find Test", "no"),
+                ("add Test", None),
+                ("find Test", "yes"),
+        )),
+    ])
+    def test_samples(self, buck_size, test_data):
+        proc = hash_chains.QueryProcessor(buck_size)
+        for query_str, expected in test_data:
+            query = proc.read_query(query_str)
+            res = proc.process_query(query)
+            assert res == expected
 
 
 @pytest.mark.timeout(5)

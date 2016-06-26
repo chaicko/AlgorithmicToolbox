@@ -26,27 +26,30 @@ class QueryProcessor:
             ans = (ans * self._multiplier + ord(c)) % self._prime
         return ans % self.bucket_count
 
-    def write_search_result(self, was_found):
-        print('yes' if was_found else 'no')
+    @staticmethod
+    def write_search_result(was_found):
+        return 'yes' if was_found else 'no'
 
-    def write_chain(self, chain):
-        print(' '.join(chain))
+    @staticmethod
+    def write_chain(chain):
+        return ' '.join(chain)
 
-    def read_query(self):
-        return Query(input().split())
+    @staticmethod
+    def read_query(query_string):
+        return Query(query_string.split())
 
     def process_query(self, query):
         if query.type == "check":
             # use reverse order, because we append strings to the end
-            self.write_chain(cur for cur in reversed(self.elems)
-                        if self._hash_func(cur) == query.ind)
+            return self.write_chain(cur for cur in reversed(self.elems)
+                                    if self._hash_func(cur) == query.ind)
         else:
             try:
                 ind = self.elems.index(query.s)
             except ValueError:
                 ind = -1
             if query.type == 'find':
-                self.write_search_result(ind != -1)
+                return self.write_search_result(ind != -1)
             elif query.type == 'add':
                 if ind == -1:
                     self.elems.append(query.s)
@@ -54,12 +57,17 @@ class QueryProcessor:
                 if ind != -1:
                     self.elems.pop(ind)
 
-    def process_queries(self):
-        n = int(input())
-        for i in range(n):
-            self.process_query(self.read_query())
+        return None
+
 
 if __name__ == '__main__':
     bucket_count = int(input())
     proc = QueryProcessor(bucket_count)
-    proc.process_queries()
+    # Process queries
+    num_queries = int(input())
+    for i in range(num_queries):
+        query = proc.read_query(input())
+        res = proc.process_query(query)
+        if res is not None:
+            print(res)
+
