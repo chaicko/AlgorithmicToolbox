@@ -93,10 +93,10 @@ class TestPhoneBook:
         return res
 
     def test_worst_case(self):
-        n = 10 ** 5
+        n = phone_book.MAX_QUERIES
         contacts = {}
-        for i in range(10 ** 7 - 1, 10 ** 7 - 1 - (n // 2), -1):
-            contacts[i] = names.get_last_name()[:15]
+        for i in range(phone_book.MAX_NUMBER, phone_book.MAX_NUMBER-(n//2), -1):
+            contacts[i] = names.get_last_name()[:phone_book.MAX_NAME_LEN]
 
         numbers = contacts.keys()
         # Create n // 2 add queries

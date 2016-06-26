@@ -1,4 +1,7 @@
 # python3
+MAX_NUMBER = 10 ** 7 - 1
+MAX_NAME_LEN = 15
+MAX_QUERIES = 10 ** 5
 
 
 class Query:
