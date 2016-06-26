@@ -167,3 +167,9 @@ class TestHashSubstring:
     ])
     def test_samples(self, pattern, text, expected):
         assert hash_substring.get_occurrences(pattern, text) == expected
+
+    def test_worst_case(self):
+        text = 'a' * 20
+        pattern = 'a' * (len(text) // 2)
+        expected = [i for i in range(len(pattern)+1)]
+        assert hash_substring.get_occurrences(pattern, text) == expected

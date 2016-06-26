@@ -1,4 +1,6 @@
 # python3
+MAX_TEXT_LEN = 5 * (10 ** 5)
+MAX_PATTERN_LEN = MAX_TEXT_LEN
 
 
 def get_occurrences(pattern, text):
