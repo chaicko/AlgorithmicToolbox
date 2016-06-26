@@ -1,5 +1,6 @@
 # python3
 
+
 class Query:
     def __init__(self, query):
         self.type = query[0]
@@ -7,12 +8,15 @@ class Query:
         if self.type == 'add':
             self.name = query[2]
 
+
 def read_queries():
     n = int(input())
-    return [Query(input().split()) for i in range(n)]
+    return [Query(input().split()) for _ in range(n)]
+
 
 def write_responses(result):
     print('\n'.join(result))
+
 
 def process_queries(queries):
     result = []
