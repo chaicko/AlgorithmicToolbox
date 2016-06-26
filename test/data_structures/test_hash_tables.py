@@ -124,6 +124,51 @@ class TestPhoneBook:
 
 @pytest.mark.timeout(7)
 class TestHashChains:
+    class MyQueryProcessor:
+        _multiplier = 263
+        _prime = 1000000007
+
+        def __init__(self, bucket_count):
+            self.bucket_count = bucket_count
+            # store all strings in one list
+            self._arr = {}
+
+        def _hash_func(self, s):
+            ans = 0
+            for c in reversed(s):
+                ans = (ans * self._multiplier + ord(c)) % self._prime
+            return ans % self.bucket_count
+
+        def process_query(self, query):
+            if query.type == "check":
+                chain = self._arr.get(query.ind, None)
+                if chain is not None:
+                    return ' '.join(reversed(chain))
+                return ''
+            else:
+                # calculate hash for input string
+                index = self._hash_func(query.s)
+                if query.type == 'add':
+                    if index in self._arr and query.s not in self._arr[index]:
+                        self._arr[index].append(query.s)
+                    else:
+                        self._arr[index] = [query.s]
+
+                if query.type == 'find':
+                    if index in self._arr and query.s in self._arr[index]:
+                        return "yes"
+                    else:
+                        return "no"
+
+                if query.type == 'del' and index in self._arr:
+                    try:
+                        self._arr[index].remove(query.s)
+                    except ValueError:
+                        pass
+
+            return None
+
+
     @pytest.mark.parametrize("buck_size,test_data", [
         (5, (
                 ("add world", None),
@@ -152,8 +197,11 @@ class TestHashChains:
     ])
     def test_samples(self, buck_size, test_data):
         proc = hash_chains.QueryProcessor(buck_size)
+        my_proc = self.MyQueryProcessor(buck_size)
         for query_str, expected in test_data:
             query = proc.read_query(query_str)
+            exp = my_proc.process_query(query)
+            assert exp == expected
             res = proc.process_query(query)
             assert res == expected
 
