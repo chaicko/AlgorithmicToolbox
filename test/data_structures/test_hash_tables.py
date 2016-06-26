@@ -160,5 +160,10 @@ class TestHashChains:
 
 @pytest.mark.timeout(5)
 class TestHashSubstring:
-    def test_sample1(self):
-        pass
+    @pytest.mark.parametrize("pattern, text, expected", [
+        ("aba", "abacaba", [0, 4]),
+        ("Test", "testTesttesT", [4]),
+        ("aaaaa", "baaaaaaa", [1, 2, 3]),
+    ])
+    def test_samples(self, pattern, text, expected):
+        assert hash_substring.get_occurrences(pattern, text) == expected
