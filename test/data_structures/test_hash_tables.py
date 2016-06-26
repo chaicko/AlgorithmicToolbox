@@ -218,7 +218,7 @@ class TestHashSubstring:
         assert hash_substring.rabin_karp(pattern, text) == expected
 
     def test_worst_case(self):
-        text = 'a' * 20
+        text = 'a' * (hash_substring.MAX_TEXT_LEN // 2)
         pattern = 'a' * (len(text) // 2)
         expected = [i for i in range(len(pattern)+1)]
         assert hash_substring.rabin_karp(pattern, text) == expected
