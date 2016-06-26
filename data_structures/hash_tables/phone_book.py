@@ -12,15 +12,6 @@ class Query:
             self.name = query[2]
 
 
-def read_queries():
-    n = int(input())
-    return [Query(input().split()) for _ in range(n)]
-
-
-def write_responses(result):
-    print('\n'.join(result))
-
-
 def process_queries(queries):
     result = []
     # Keep list of all existing (i.e. not deleted yet) contacts.
@@ -37,5 +28,12 @@ def process_queries(queries):
     return result
 
 if __name__ == '__main__':
+    def read_queries():
+        n = int(input())
+        return [Query(input().split()) for _ in range(n)]
+
+    def write_responses(result):
+        print('\n'.join(result))
+
     write_responses(process_queries(read_queries()))
 
