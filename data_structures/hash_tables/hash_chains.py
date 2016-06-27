@@ -18,7 +18,10 @@ class QueryProcessor:
     def __init__(self, bucket_count):
         self.bucket_count = bucket_count
         # store all strings in one list
-        self._arr = [[]] * bucket_count
+        self._arr = []
+        for _ in range(bucket_count):
+            self._arr.append(list())
+        self.processed_queries = []
 
     def _hash_func(self, s):
         ans = 0
@@ -27,32 +30,32 @@ class QueryProcessor:
         return ans % self.bucket_count
 
     @staticmethod
-    def write_search_result(was_found):
-        return 'yes' if was_found else 'no'
-
-    @staticmethod
-    def write_chain(chain):
-        return ' '.join(chain)
-
-    @staticmethod
     def read_query(query_string):
         return Query(query_string.split())
 
     def process_query(self, query):
         if query.type == "check" and query.ind < len(self._arr):
-            chain = self._arr[query.ind]
+            chain_l = self._arr[query.ind]
+            chain = ' '.join(reversed(chain_l))
+            self.processed_queries.append(chain)
             # use reverse order, because we append strings to the end
-            return self.write_chain(reversed(chain))
+            return chain
         else:
             # calculate hash for input string
             index = self._hash_func(query.s)
-            found = query.s in self._arr[index]
+            chain = self._arr[index]
+            found = query.s in chain
+
             if query.type == 'find':
-                return self.write_search_result(found)
+                msg = "yes" if found else "no"
+                self.processed_queries.append(msg)
+                return msg
+
             if query.type == 'add' and not found:
-                self._arr[index].append(query.s)
+                chain.append(query.s)
+
             if query.type == 'del' and found:
-                self._arr[index].remove(query.s)
+                chain.remove(query.s)
 
         return None
 
@@ -62,9 +65,11 @@ if __name__ == '__main__':
     proc = QueryProcessor(bucket_count)
     # Process queries
     num_queries = int(input())
+    results = []
     for i in range(num_queries):
         query = proc.read_query(input())
         res = proc.process_query(query)
         if res is not None:
-            print(res)
-
+            results.append(res)
+    for r in results:
+        print(r)

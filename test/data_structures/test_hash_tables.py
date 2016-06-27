@@ -205,6 +205,47 @@ class TestHashChains:
             res = proc.process_query(query)
             assert res == expected
 
+    def test_repeated_deletion(self):
+        proc = hash_chains.QueryProcessor(5)
+        queries = ["add test",
+                   "add test",
+                   "add test",
+                   "del test",
+                   "del test",
+                   "del test",
+                   "check 0",
+                   "check 1",
+                   "check 2",
+                   "check 3",
+                   "check 4"]
+        expected = ['', '', '', '', '']
+        for query_str in queries:
+            query = proc.read_query(query_str)
+            proc.process_query(query)
+        assert proc.processed_queries == expected
+
+    def test_repeated_checks(self):
+        proc = hash_chains.QueryProcessor(5)
+        queries = ["check 0",
+                   "add test",
+                   "find test",
+                   "check 0",
+                   "check 1",
+                   "check 2",
+                   "check 3",
+                   "check 4",
+                   "add Test",
+                   "del test",
+                   "find test",
+                   "check 0",
+                   ]
+
+        for query_str in queries:
+            query = proc.read_query(query_str)
+            proc.process_query(query)
+
+        pass
+
 
 @pytest.mark.timeout(5)
 class TestHashSubstring:
