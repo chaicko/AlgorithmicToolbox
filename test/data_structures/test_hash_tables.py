@@ -95,7 +95,7 @@ class TestPhoneBook:
 
         return res
 
-    max_timeout = 6 if not CI else 10
+    max_timeout = 6 if not CI else 20
 
     @pytest.mark.timeout(max_timeout)
     def test_worst_case(self):
