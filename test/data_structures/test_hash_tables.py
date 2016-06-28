@@ -7,7 +7,7 @@ import random
 from faker import Factory
 import os
 
-CI = os.environ['CI'] == 'true'
+CI = os.environ.get('CI') == 'true'
 
 
 @pytest.mark.timeout(6)
@@ -95,9 +95,6 @@ class TestPhoneBook:
 
         return res
 
-    max_timeout = 6 if not CI else 20
-
-    @pytest.mark.timeout(max_timeout)
     def test_worst_case(self):
         n = phone_book.MAX_QUERIES
         contacts = {}
