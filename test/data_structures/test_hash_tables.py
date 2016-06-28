@@ -5,6 +5,9 @@ import data_structures.hash_tables.phone_book as phone_book
 import pytest
 import random
 from faker import Factory
+import os
+
+CI = os.environ['CI'] == 'true'
 
 
 @pytest.mark.timeout(6)
@@ -92,6 +95,9 @@ class TestPhoneBook:
 
         return res
 
+    max_timeout = 6 if not CI else 10
+
+    @pytest.mark.timeout(max_timeout)
     def test_worst_case(self):
         n = phone_book.MAX_QUERIES
         contacts = {}
