@@ -1,6 +1,5 @@
 language: python
 python:
-  - "3.3"
   - "3.4"
   - "3.5"
 install:
@@ -8,7 +7,7 @@ install:
   - pip install -r requirements.txt -r dev-requirements.txt
 script:
   # Normal tests
-  - py.test --boxed
+  - py.test
   # Integration tests
 after_success:
   - coveralls
