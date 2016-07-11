@@ -156,8 +156,17 @@ def sum(fr, to):
     global root
     (left, middle) = split(root, fr)
     (middle, right) = split(middle, to + 1)
-    ans = 0
+    ans = middle.sum
     # Complete the implementation of sum
+    print("Contents:")
+    if left:
+        print("Left", left.key, left.sum)
+    if middle:
+        print("middle", middle.key, middle.sum)
+    if right:
+        print("Right", right.key, right.sum)
+
+    # root = merge(merge(left, middle), right)
 
     return ans
 
