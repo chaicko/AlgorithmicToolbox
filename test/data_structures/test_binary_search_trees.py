@@ -150,11 +150,17 @@ class TestTreeOrders:
          [1, 3, -1, -1, -1],
          [2, 4, -1, -1, -1],
          [1, 2, 3, 4, 5], [4, 2, 1, 3, 5], [1, 3, 2, 5, 4]),
-
+        (10,
+         [0, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+         [7, -1, -1, 8, 3, -1, 1, 5, -1, -1],
+         [2, -1, 6, 9, -1, -1, -1, 4, -1, -1],
+         [50, 70, 80, 30, 90, 40, 0, 20, 10, 60],
+         [0, 70, 50, 40, 30, 80, 90, 20, 60, 10],
+         [50, 80, 90, 30, 40, 70, 10, 60, 20, 0])
     ])
     def test_samples(self, n,key,left,right,exp_inorder,exp_preorder,exp_postorder):
         tree = tree_orders.TreeOrders(n, key, left, right)
-        assert exp_inorder == tree.in_order()
-        assert exp_preorder == tree.pre_order()
-        assert exp_postorder == tree.post_order()
+        assert exp_inorder == tree.order(tree.in_order)
+        assert exp_preorder == tree.order(tree.pre_order)
+        assert exp_postorder == tree.order(tree.post_order)
 

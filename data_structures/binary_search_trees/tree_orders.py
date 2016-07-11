@@ -12,44 +12,49 @@ class TreeOrders:
         self.left = left
         self.right = right
 
-    def in_order(self):
-        self.result = []
-        # Finish the implementation
-        # You may need to add a new recursive method to do that
+    def in_order(self, index, res):
+        if index < 0:
+            return
+        self.in_order(self.left[index], res)
+        res.append(self.key[index])
+        self.in_order(self.right[index], res)
 
-        return self.result
+    def pre_order(self, index, res):
+        if index < 0:
+            return
+        res.append(self.key[index])
+        self.pre_order(self.left[index], res)
+        self.pre_order(self.right[index], res)
 
-    def pre_order(self):
-        self.result = []
-        # Finish the implementation
-        # You may need to add a new recursive method to do that
+    def post_order(self, index, res):
+        if index < 0:
+            return
+        self.post_order(self.left[index], res)
+        self.post_order(self.right[index], res)
+        res.append(self.key[index])
 
-        return self.result
-
-    def post_order(self):
-        self.result = []
-        # Finish the implementation
-        # You may need to add a new recursive method to do that
-
-        return self.result
-
-
-def main():
-    n = int(sys.stdin.readline())
-    key = [0] * n
-    left = list(key)
-    right = list(key)
-    for i in range(n):
-        [a, b, c] = map(int, sys.stdin.readline().split())
-        key[i] = a
-        left[i] = b
-        right[i] = c
-
-    tree = TreeOrders(n, key, left, right)
-    print(" ".join(str(x) for x in tree.in_order()))
-    print(" ".join(str(x) for x in tree.pre_order()))
-    print(" ".join(str(x) for x in tree.post_order()))
+    @staticmethod
+    def order(method):
+        result = []
+        method(0, result)
+        return result
 
 
 if __name__ == "__main__":
+    def main():
+        n = int(sys.stdin.readline())
+        key = [0] * n
+        left = list(key)
+        right = list(key)
+        for i in range(n):
+            [a, b, c] = map(int, sys.stdin.readline().split())
+            key[i] = a
+            left[i] = b
+            right[i] = c
+
+        tree = TreeOrders(n, key, left, right)
+        print(" ".join(str(x) for x in tree.order(tree.in_order)))
+        print(" ".join(str(x) for x in tree.order(tree.pre_order)))
+        print(" ".join(str(x) for x in tree.order(tree.post_order)))
+
     threading.Thread(target=main).start()
