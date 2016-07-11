@@ -202,6 +202,30 @@ class TestSetRangeSum:
                 "1",
                 "Not found",
                 "10",
+            ]), (
+            (
+                "? 0",
+                "+ 0",
+                "? 0",
+                "- 0",
+                "? 0",
+             ),
+            [
+                "Not found",
+                "Found",
+                "Not found"
+            ]), (
+            (
+                "+ 491572259",
+                "? 491572259",
+                "? 899375874",
+                "s 310971296 877523306",
+                "+ 352411209",
+             ),
+            [
+                "Found",
+                "Not found",
+                "491572259"
             ])
         ])
     def test_samples(self, test_input, expected):
