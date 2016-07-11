@@ -142,8 +142,12 @@ def insert(x):
 
 def erase(x):
     global root
-    # Implement erase yourself
-    pass
+    (result, root) = find(root, x)
+    if result and result.key == x:
+        (left, middle) = split(root, x)
+        (middle, right) = split(middle, x + 1)
+        root = merge(left, right)
+        del middle
 
 
 def search(x):
@@ -158,15 +162,15 @@ def sum(fr, to):
     (middle, right) = split(middle, to + 1)
     ans = middle.sum
     # Complete the implementation of sum
-    print("Contents:")
-    if left:
-        print("Left", left.key, left.sum)
-    if middle:
-        print("middle", middle.key, middle.sum)
-    if right:
-        print("Right", right.key, right.sum)
+    # print("Contents:")
+    # if left:
+    #     print("Left", left.key, left.sum)
+    # if middle:
+    #     print("middle", middle.key, middle.sum)
+    # if right:
+    #     print("Right", right.key, right.sum)
 
-    # root = merge(merge(left, middle), right)
+    root = merge(merge(left, middle), right)
 
     return ans
 
