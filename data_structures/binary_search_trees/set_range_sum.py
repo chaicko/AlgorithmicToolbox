@@ -148,9 +148,8 @@ def erase(x):
 
 def search(x):
     global root
-    # Implement find yourself
-
-    return False
+    (result, root) = find(root, x)
+    return result and result.key == x
 
 
 def sum(fr, to):
