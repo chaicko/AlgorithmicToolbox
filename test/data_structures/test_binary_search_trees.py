@@ -226,7 +226,26 @@ class TestSetRangeSum:
                 "Found",
                 "Not found",
                 "491572259"
-            ])
+            ]),
+            # (
+            # (
+            #     "s 88127140 859949755",
+            #     "s 407584225 906606553",
+            #     "+ 885530090",
+            #     "+ 234423189",
+            #     "s 30746291 664192454",
+            #     "+ 465752492",
+            #     "s 848498590 481606032",
+            #     "+ 844636782",
+            #     "+ 251529178",
+            #     "+ 182631153",
+            #  ),
+            # [
+            #     "0",
+            #     "0",
+            #     "234423189"
+            # ])
+
         ])
     def test_samples(self, test_input, expected):
         result = []
@@ -236,4 +255,13 @@ class TestSetRangeSum:
             if res:
                 result.append(res)
         assert result == expected
+
+    # def test_input_files(self):
+    #     result = []
+    #     processor = set_range_sum.RangeSumProcessor()
+    #     for cmd in test_input:
+    #         res = processor.process(cmd)
+    #         if res:
+    #             result.append(res)
+    #     assert result == expected
 
