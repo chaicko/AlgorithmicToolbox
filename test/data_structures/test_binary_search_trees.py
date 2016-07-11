@@ -1,5 +1,5 @@
 # import data_structures.binary_search_trees.rope as rope
-# import data_structures.binary_search_trees.set_range_sum as set_range_sum
+import data_structures.binary_search_trees.set_range_sum as set_range_sum
 import data_structures.binary_search_trees.tree_orders as tree_orders
 
 import pytest
@@ -163,4 +163,53 @@ class TestTreeOrders:
         assert exp_inorder == tree.order(tree.in_order)
         assert exp_preorder == tree.order(tree.pre_order)
         assert exp_postorder == tree.order(tree.post_order)
+
+@pytest.mark.timeout(120)
+class TestSetRangeSum:
+    @classmethod
+    def setup_class(cls):
+        """ setup any state specific to the execution of the given class (which
+        usually contains tests).
+        """
+        del set_range_sum.root
+        set_range_sum.root = None
+
+    @pytest.mark.parametrize(
+        "test_input,expected", [(
+            (
+                "? 1",
+                "+ 1",
+                "? 1",
+                "+ 2",
+                "s 1 2",
+                "+ 1000000000",
+                "? 1000000000",
+                "- 1000000000",
+                "? 1000000000",
+                "s 999999999 1000000000",
+                "- 2",
+                "? 2",
+                "- 0",
+                "+ 9",
+                "s 0 9"
+             ),
+            [
+                "Not found",
+                "Found",
+                "3",
+                "Found",
+                "Not found",
+                "1",
+                "Not found",
+                "10",
+            ])
+        ])
+    def test_samples(self, test_input, expected):
+        result = []
+        processor = set_range_sum.RangeSumProcessor()
+        for cmd in test_input:
+            res = processor.process(cmd)
+            if res:
+                result.append(res)
+        assert result == expected
 
