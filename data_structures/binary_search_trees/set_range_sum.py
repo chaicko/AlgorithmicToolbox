@@ -160,7 +160,7 @@ def sum(fr, to):
     global root
     (left, middle) = split(root, fr)
     (middle, right) = split(middle, to + 1)
-    ans = middle.sum
+    ans = middle.sum if middle else 0
     # Complete the implementation of sum
     # print("Contents:")
     # if left:
