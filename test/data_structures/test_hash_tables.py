@@ -8,9 +8,9 @@ from faker import Factory
 import os
 
 CI = os.environ.get('CI') == 'true'
+PHONEBOOK_TIMEOUT = 6 if not CI else 60
 
-
-@pytest.mark.timeout(6)
+@pytest.mark.timeout(PHONEBOOK_TIMEOUT)
 class TestPhoneBook:
     @pytest.mark.parametrize("test_input,expected", [
         (
