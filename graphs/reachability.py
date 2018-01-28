@@ -8,7 +8,7 @@ def reach(adj, x, y):
 
 
 def parse_input(input):
-    data = list(map(int, input.split()))
+    data = list(map(int, input.strip().split()))
     n, m = data[0:2]
     data = data[2:]
     edges = list(zip(data[0:(2 * m):2], data[1:(2 * m):2]))
@@ -23,10 +23,5 @@ def parse_input(input):
     return adj, x, y
 
 
-def main(args):
-    adj, x, y = parse_input(sys.stdin.read().strip())
-    print(reach(adj, x, y))
-
-
 if __name__ == '__main__':
-    main(sys.args[1:])
+    print(reach(*parse_input(sys.stdin.read())))

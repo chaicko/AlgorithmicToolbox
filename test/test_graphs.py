@@ -1,11 +1,39 @@
-import graphs.reachability as reachability
+import graphs.reachability as reach
 import pytest
 
 
 @pytest.mark.timeout(5)  # 5 seconds timeout for basic graphs
-class TestBasicGraphs:
+class TestReachability:
     @pytest.mark.parametrize("test_input,expected", [
-        (([5, 1, 5, 8, 12, 13], [5, 8, 1, 23, 1, 11]), "2 0 -1 0 -1")
+        ('''
+        4 4
+        1 2
+        3 2
+        4 3
+        1 4
+        1 4''', ([[1, 3], [0, 2], [1, 3], [2, 0]], 0, 3)),
+        ('''
+        4 2
+        1 2
+        3 2
+        1 4''', ([[1], [0, 2], [1], []], 0, 3)),
     ])
-    def test_sample(self, test_input, expected, main_runner):
-        assert True  # False
+    def test_parse_input(self, test_input, expected):
+        assert reach.parse_input(test_input) == expected
+
+    @pytest.mark.parametrize("test_input,expected", [
+        ('''
+        4 4
+        1 2
+        3 2
+        4 3
+        1 4
+        1 4''', 1),
+        ('''
+        4 2
+        1 2
+        3 2
+        1 4''', 0),
+    ])
+    def test_sample(self, test_input, expected):
+        assert reach.reach(*reach.parse_input(test_input)) == expected
