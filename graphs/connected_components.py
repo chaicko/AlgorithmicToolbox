@@ -1,12 +1,12 @@
-#Uses python3
-
+# Uses python3
 import sys
 
 
 def number_of_components(adj):
     result = 0
-    #write your code here
+    # write your code here
     return result
+
 
 if __name__ == '__main__':
     input = sys.stdin.read()
