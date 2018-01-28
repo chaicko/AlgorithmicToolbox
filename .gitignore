@@ -9,3 +9,4 @@ stats.dat
 __pycache__
 *.coverage
 .cache
+.vscode
