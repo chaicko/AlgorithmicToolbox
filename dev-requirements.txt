@@ -1,5 +1,5 @@
 coverage
-fake-factory
+faker
 pexpect
 python-coveralls
 pytest>=2.8.0
