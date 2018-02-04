@@ -21,6 +21,23 @@ class TestReachability:
     def test_parse_input(self, test_input, expected):
         assert reach.parse_input(test_input) == expected
 
+    def test_min_no_reach(self):
+        assert reach.reach([[], []], 0, 1) == 0
+
+    def test_min_reach(self):
+        assert reach.reach([[1], [0]], 0, 1) == 1
+
+    @pytest.mark.skip("Complete this one!")
+    def test_longest_path(self):
+        # Longest path is the longest hops from frist vertex to last
+        adj = [[] for _ in range(reach.MAX_VERTICES)]
+        adj[0].append(1)
+        adj[-1].append(len(adj)-2)
+        for i in range(1, len(adj)-1):
+            pass
+
+        pass
+
     @pytest.mark.parametrize("test_input,expected", [
         ('''
         4 4

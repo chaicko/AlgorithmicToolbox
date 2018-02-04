@@ -1,10 +1,31 @@
 # Uses python3
 import sys
 
+MIN_VERTICES, MAX_VERTICES = (2, 10**3)
+MIN_EDGES, MAX_EDGES = (1, 10**3)
+
+
+def explore(adj, x):
+    visited = [False] * len(adj)
+
+    def _explore(v):
+        nonlocal visited  # reference to outer scope visited
+        visited[v] = True
+        for u in adj[v]:
+            if not visited[u]:
+                _explore(u)
+    _explore(x)
+
+    return visited
+
 
 def reach(adj, x, y):
-    # write your code here
-    return 0
+    if adj[x] == []:
+        return 0  # Non reachable
+    elif y in adj[x]:  # immediate neighbour
+        return 1
+    visited = explore(adj, x)
+    return 1 if visited[y] else 0
 
 
 def parse_input(input):
