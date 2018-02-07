@@ -1,16 +1,33 @@
 # Uses python3
 import sys
 
+MIN_VERTICES, MAX_VERTICES = (2, 10**3)
+MIN_EDGES, MAX_EDGES = (1, 10**3)
+
+
+def explore(adj, x, visited):
+
+    def _explore(v):
+        nonlocal visited  # reference to outer scope visited
+        visited[v] = True
+        for u in adj[v]:
+            if not visited[u]:
+                _explore(u)
+    _explore(x)
+
 
 def number_of_components(adj):
-    result = 0
-    # write your code here
-    return result
+    visited = [False] * len(adj)
+    cc = 0
+    for i in range(len(adj)):
+        if not visited[i]:
+            explore(adj, i, visited)
+            cc += 1
+    return cc
 
 
-if __name__ == '__main__':
-    input = sys.stdin.read()
-    data = list(map(int, input.split()))
+def parse_input(input):
+    data = list(map(int, input.strip().split()))
     n, m = data[0:2]
     data = data[2:]
     edges = list(zip(data[0:(2 * m):2], data[1:(2 * m):2]))
@@ -18,4 +35,8 @@ if __name__ == '__main__':
     for (a, b) in edges:
         adj[a - 1].append(b - 1)
         adj[b - 1].append(a - 1)
-    print(number_of_components(adj))
+    return adj
+
+
+if __name__ == '__main__':
+    print(number_of_components(parse_input(sys.stdin.read())))

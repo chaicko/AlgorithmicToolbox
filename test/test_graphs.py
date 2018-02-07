@@ -1,4 +1,5 @@
 import graphs.reachability as reach
+import graphs.connected_components as cc
 import pytest
 
 
@@ -54,3 +55,26 @@ class TestReachability:
     ])
     def test_sample(self, test_input, expected):
         assert reach.reach(*reach.parse_input(test_input)) == expected
+
+
+@pytest.mark.timeout(5)  # 5 seconds timeout for basic graphs
+class TestConnectedComponents:
+    @pytest.mark.parametrize("test_input,expected", [
+        ('''
+        4 2
+        1 2
+        3 2
+        1 2''', ([[1], [0, 2], [1], []])),
+    ])
+    def test_parse_input(self, test_input, expected):
+        assert cc.parse_input(test_input) == expected
+
+    @pytest.mark.parametrize("test_input,expected", [
+        ('''
+        4 2
+        1 2
+        3 2
+        1 2''', 2,)
+    ])
+    def test_sample(self, test_input, expected):
+        assert cc.number_of_components(cc.parse_input(test_input)) == expected
