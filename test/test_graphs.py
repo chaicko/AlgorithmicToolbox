@@ -1,5 +1,6 @@
 import graphs.reachability as reach
 import graphs.connected_components as cc
+import graphs.acyclicity as ac
 import pytest
 
 
@@ -78,3 +79,43 @@ class TestConnectedComponents:
     ])
     def test_sample(self, test_input, expected):
         assert cc.number_of_components(cc.parse_input(test_input)) == expected
+
+
+@pytest.mark.timeout(5)  # 5 seconds timeout for basic graphs
+class TestAcyclicity:
+
+    def test_graph_bad_inpput(self):
+        with pytest.raises(ValueError):
+            g = ac.Graph(None)
+
+    def test_graph_adj_input(self):
+        adj_info_str = '''
+        4 2
+        1 2
+        3 2
+        1 2'''
+        adj_info_list = [[1], [0, 2], [1], []]
+        g1 = ac.Graph(adj_info_str, directed=False)
+        g2 = ac.Graph(adj_info_list)
+        assert g1.adj == g2.adj
+        assert g1.adj == adj_info_list
+
+    @pytest.mark.parametrize("test_input,expected", [
+        ('''
+        4 4
+        1 2
+        4 1
+        2 3
+        3 1''', 1,),
+        ('''
+        5 7
+        1 2
+        2 3
+        1 3
+        3 4
+        1 4
+        2 5
+        3 5''', 0,),
+    ])
+    def test_sample(self, test_input, expected):
+        assert ac.acyclic(ac.Graph(test_input)) == expected
