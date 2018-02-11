@@ -100,7 +100,11 @@ class Graph:
         raise RuntimeError('Unclassified edge {}'.format((x, y)))
 
 
-def number_of_strongly_connected_components(adj_info):
+def num_scc_skiena(adj_info):
+    """Counts strongly connected components by using more data structures.
+
+    Solution taken from "The Algorithm Design Manual", Skiena, and
+    rewritten in Python. """
     active = list()
     cc = 0
 
@@ -141,5 +145,35 @@ def number_of_strongly_connected_components(adj_info):
     return cc
 
 
+def num_scc_rev(adj_info):
+    """Counts strongly connected components by revered Graph.
+
+    This solution is slightly less performand then Skiena:
+
+    This one used: (Max time used: 0.12/5.00, max memory used: 11837440/536870912.)
+    while Skiena's (Max time used: 0.10/5.00, max memory used: 11833344/536870912.)
+    """
+    order = list()
+
+    def push_vertex(g, v):
+        order.append(v)
+
+    graph = Graph(adj_info)
+    rev_graph = Graph(reverse_adj(graph.adj), postvisit=push_vertex)
+    rev_graph.dfs()  # DFS on reverse generates the post-ordering
+
+    graph.dfs(ordered_vertices=reversed(order))  # DFS in graph on provided order
+    return graph.cc
+
+
+def reverse_adj(adj):
+    rev = [[] for _ in range(len(adj))]
+    for i, l in enumerate(adj):
+        for v in l:
+            rev[v].append(i)
+    return rev
+
+
 if __name__ == '__main__':
-    print(number_of_strongly_connected_components(sys.stdin.read()))
+    #  print(num_scc_skiena(sys.stdin.read()))
+    print(num_scc_rev(sys.stdin.read()))

@@ -2,6 +2,7 @@ import graphs.reachability as reach
 import graphs.connected_components as cc
 import graphs.acyclicity as ac
 import graphs.toposort as topo
+import graphs.strongly_connected as scc
 import pytest
 
 
@@ -150,3 +151,28 @@ class TestToposort:
     ])
     def test_sample(self, test_input, expected):
         assert topo.toposort_str(test_input, directed=True) == expected
+
+
+@pytest.mark.timeout(5)
+class TestSCC:
+
+    @pytest.mark.parametrize("test_input,expected", [
+        ('''
+        4 4
+        1 2
+        4 1
+        2 3
+        3 1''', 2,),
+        ('''
+        5 7
+        2 1
+        3 2
+        3 1
+        4 3
+        4 1
+        5 2
+        5 3''', 5,),
+    ])
+    def test_sample(self, test_input, expected):
+        assert scc.num_scc_skiena(test_input) == expected
+        assert scc.num_scc_rev(test_input) == expected
