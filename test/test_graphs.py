@@ -1,6 +1,7 @@
 import graphs.reachability as reach
 import graphs.connected_components as cc
 import graphs.acyclicity as ac
+import graphs.toposort as topo
 import pytest
 
 
@@ -119,3 +120,33 @@ class TestAcyclicity:
     ])
     def test_sample(self, test_input, expected):
         assert ac.acyclic(ac.Graph(test_input)) == expected
+
+
+@pytest.mark.timeout(10)  # 10 seconds timeout for basic graphs
+class TestToposort:
+
+    def test_graph_bad_inpput(self):
+        with pytest.raises(ValueError):
+            ac.Graph(None)
+
+    @pytest.mark.parametrize("test_input,expected", [
+        ('''
+        4 3
+        1 2
+        4 1
+        3 1''', "4 3 1 2",),
+        ('''
+        4 1
+        3 1''', "4 3 2 1",),
+        ('''
+        5 7
+        2 1
+        3 2
+        3 1
+        4 3
+        4 1
+        5 2
+        5 3''', "5 4 3 2 1",),
+    ])
+    def test_sample(self, test_input, expected):
+        assert topo.toposort_str(test_input, directed=True) == expected
