@@ -18,6 +18,7 @@ class Graph:
             if not directed:
                 adj[b - 1].append(a - 1)
         return adj
+
     def __init__(self, adj_info, directed=True):
         if isinstance(adj_info, str):
             self.adj = Graph.parse_adj_info(adj_info, directed)

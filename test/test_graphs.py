@@ -86,7 +86,7 @@ class TestAcyclicity:
 
     def test_graph_bad_inpput(self):
         with pytest.raises(ValueError):
-            g = ac.Graph(None)
+            ac.Graph(None)
 
     def test_graph_adj_input(self):
         adj_info_str = '''
