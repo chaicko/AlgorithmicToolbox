@@ -104,7 +104,10 @@ def num_scc_skiena(adj_info):
     """Counts strongly connected components by using more data structures.
 
     Solution taken from "The Algorithm Design Manual", Skiena, and
-    rewritten in Python. """
+    rewritten in Python.
+
+    Note that this one has a worse McCabe number than the other (15).
+    """
     active = list()
     cc = 0
 
