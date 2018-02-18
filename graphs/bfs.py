@@ -30,7 +30,7 @@ class Graph:
         self.distance[starting_vertex] = 0
         q.put(starting_vertex)
 
-        while not q.empty:
+        while not q.empty():
             v = q.get()
             self.previsit(self, v)
             self.processed[v] = True
@@ -42,6 +42,7 @@ class Graph:
                     self.parent[u] = v
                     self.visited[u] = True
                     self.distance[u] = self.distance[v] + 1
+                    q.put(u)
 
             self.postvisit(self, v)
 
@@ -63,8 +64,8 @@ def parse_input(input):
         adj[a - 1].append(b - 1)
         adj[b - 1].append(a - 1)
     s, t = data[2 * m] - 1, data[2 * m + 1] - 1
-    return adj, s, t
+    return adj, s-1, t-1
 
 
 if __name__ == '__main__':
-    print(distance(parse_input(sys.stdin.read())))
+    print(distance(*parse_input(sys.stdin.read())))
