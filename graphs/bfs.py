@@ -25,6 +25,8 @@ class Graph:
         self.parent = [None] * len(self.adj)
 
     def bfs(self, starting_vertex=0):
+        self.initialize()
+
         q = queue.Queue()
         self.visited[starting_vertex] = True
         self.distance[starting_vertex] = 0
